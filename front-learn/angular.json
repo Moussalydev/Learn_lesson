@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "front-learn"
+    }
+  },
+  "defaultProject": "front-learn",
+  "cli": {
+    "analytics": false
+  }
 }
