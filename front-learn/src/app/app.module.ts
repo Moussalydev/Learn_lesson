@@ -1,14 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ConnexionComponent } from './connexion/connexion.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { EvaluerComponent } from './evaluer/evaluer.component';
+
 import { HttpClientModule } from '@angular/common/http';
+
+import { ConnexionComponent } from './connexion/connexion.component';
+import { EvaluerComponent } from './evaluer/evaluer.component';
+import { ListElevesComponent } from './list-eleves/list-eleves.component';
+import { AjoutElevesComponent } from './ajout-eleves/ajout-eleves.component';
+import { AjoutSubjectComponent } from './ajout-subject/ajout-subject.component';
+import { SignupComponent } from './signup/signup.component';
 
 
 
@@ -16,7 +20,12 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [
     AppComponent,
     ConnexionComponent,
-    EvaluerComponent
+    EvaluerComponent,
+    ListElevesComponent,
+    AjoutElevesComponent,
+    AjoutSubjectComponent,
+    SignupComponent,
+  
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,14 @@
+<form [formGroup]="myForm">
+    <div class="form-group">
+      <label for="nom_matiere">Nom de la matiere </label>
+      <input type="text" id="nom_speciality" class="form-control" formControlName="nom_speciality" placeholder="nom matiere">
+    </div>
+    <div class="form-group">
+      <label for="Coefficient">Coefficient</label>
+      <input type="text" id="coef" class="form-control" formControlName="coef" placeholder="Coefficient">
+    </div>
+    
+
+  
+    <button type="submit" [disabled]="myForm.invalid" class="btn btn-primary" (click)="onSubmitForm()">Soumettre</button>
+  </form>

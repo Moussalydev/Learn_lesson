@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row">
+    <div class="col-md-8" style="margin: auto;">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th> Matricule </th>
+                <th> Prenom </th>
+                <th> Nom </th>
+                <th> Date de naissance </th>
+                <th> Lieu de naissance </th>
+                <th> Niveau </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let eleve of eleves">
+                <td> {{eleve.matricule}}</td>
+                <td> {{eleve.prenom}} </td>
+                <td> {{eleve.nom}} </td>
+                <td> {{eleve.date_naissance | date}} </td>
+                <td> {{eleve.lieu_naissance}} </td>
+                <td> {{eleve.niveau}}</td>
+
+            </tr>
+        </tbody>
+
+
+    </table>
+
+</div>
+</div>
+</div>
