@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EvaluationService } from '../services/evaluation.service';
 import { ExamenService } from '../services/examen.service';
 import { ActivatedRoute } from '@angular/router';
+import { EleveService } from '../services/eleves.service';
 
 @Component({
   selector: 'app-bulletin',
@@ -13,10 +14,13 @@ export class BulletinComponent implements OnInit {
   constructor(
         private route:ActivatedRoute, 
         private evaluationService:EvaluationService,
-        private examenService:ExamenService
+        private examenService:ExamenService,
+        private eleveService:EleveService
     ) { }
   
   moyenne_control_continu =[];
+  moyenne_examen = [];
+  eleve:any;
   
 
   note_compo_math:number;
@@ -27,18 +31,28 @@ export class BulletinComponent implements OnInit {
   ngOnInit(): void {
 
       this.id = this.route.snapshot.params['id'];
-
-      this.Moyenne_control_continu("Math");  
       this.Moyenne_control_continu("Anglais");
+      this.Moyenne_control_continu("Math");  
+      this.Note_Examen("Anglais");
+      this.Note_Examen("Math");
       
-      console.log(this.moyenne_control_continu)
-
 
       
+      
+     
 
 
 
+  }
+  Find_Eleve(matricule){
 
+    this.eleveService.TrouverEleveParId(matricule)
+      .subscribe(data => {
+            this.eleve =data;
+       
+      }, error => 
+      console.log(error)
+      );
   }
 
   Moyenne_control_continu(matiere){
@@ -49,22 +63,35 @@ export class BulletinComponent implements OnInit {
               this.moyenne_control_continu.push({
                   "matiere":matiere,
                   "noteDevoir":data[0].note,
-                  "coef": 3
+                  "coef": 3,
+                  "noteExamen":0
 
               })
         }
         else 
-        if(matiere == "Anglais"){
+        if(matiere == "Anglais" || matiere == "Espagnol" || matiere == "science physique" 
+            || matiere =="compo française" || matiere =="EPS" || matiere =="SVT"){
+
           this.moyenne_control_continu.push({
               "matiere":matiere,
               "noteDevoir":data[0].note,
-              "coef": 2
+              "coef": 2,
+              "noteExamen":0
+              
 
           })
       }
-        
+      else
+          if(matiere == "orthographe" || matiere =="TSQ"){
+            this.moyenne_control_continu.push({
+                "matiere":matiere,
+                "noteDevoir":data[0].note,
+                "coef": 1,
+                "noteExamen":0
 
-            
+            })
+          }
+      
 
            
       }, error => 
@@ -74,11 +101,40 @@ export class BulletinComponent implements OnInit {
   }
   
 
-  Note_Examen(matricule,matiere,semestre){
+  Note_Examen(matiere){
 
-    this.examenService.TrouverEleveParEleve(matricule,matiere,semestre)
+    this.examenService.TrouverEleveParEleve(this.id,matiere,"SEMESTER1")
       .subscribe(data => {
-              //console.log(data)
+        if(matiere == "Math"){
+          this.moyenne_examen.push({
+              "matiere":matiere,
+              "noteExamen":data[0].note,
+              "coef": 3
+
+          })
+    }
+    else 
+    if(matiere == "Anglais" || matiere == "Espagnol" || matiere == "science physique" 
+        || matiere =="compo française" || matiere =="EPS" || matiere =="SVT"){
+
+      this.moyenne_examen.push({
+          "matiere":matiere,
+          "noteExamen":data[0].note,
+          "coef": 2
+
+      })
+  }
+  else
+      if(matiere == "orthographe" || matiere =="TSQ"){
+        this.moyenne_examen.push({
+            "matiere":matiere,
+            "noteExamen":data[0].note,
+            "coef": 1
+
+        })
+      }
+  
+              
               
         
       }, error => 
