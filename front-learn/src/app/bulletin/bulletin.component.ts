@@ -19,11 +19,20 @@ export class BulletinComponent implements OnInit {
     ) { }
   
   moyenne_control_continu =[];
-  moyenne_examen = [];
   eleve:any;
   
 
   note_compo_math:number;
+  note_compo_compfr:number;
+  note_compo_espagnol:number;
+  note_compo_svt:number;
+  note_compo_anglais:number;
+  note_compo_hg:number;
+  note_compo_ort:number;
+  note_compo_tsq:number;
+  note_compo_ec:number;
+  note_compo_pc:number;
+  note_compo_eps:number;
 
  
   
@@ -33,10 +42,91 @@ export class BulletinComponent implements OnInit {
       this.id = this.route.snapshot.params['id'];
       this.Moyenne_control_continu("Anglais");
       this.Moyenne_control_continu("Math");  
-      this.Note_Examen("Anglais");
-      this.Note_Examen("Math");
-      
+      //Note compomath
+      this.examenService.TrouverEleveParEleve(this.id,"Math","SEMESTER1")
+      .subscribe(data => {
+              this.note_compo_math = data[0].note;
+        
+      }, error => 
+      console.log(error)
+      );
+      //Compo Anglais
+      this.examenService.TrouverEleveParEleve(this.id,"Anlais","SEMESTER1")
+      .subscribe(data => {
+              this.note_compo_anglais = data[0].note;
+        
+      }, error => 
+      console.log(error)
+      );
 
+      //Compo Espagnol
+      this.examenService.TrouverEleveParEleve(this.id,"Espagnol","SEMESTER1")
+      .subscribe(data => {
+              this.note_compo_espagnol = data[0].note;
+        
+      }, error => 
+      console.log(error)
+      );
+       //Compo pc
+       this.examenService.TrouverEleveParEleve(this.id,"science physique","SEMESTER1")
+       .subscribe(data => {
+               this.note_compo_pc = data[0].note;
+         
+       }, error => 
+       console.log(error)
+       );
+       //Compo pc
+       this.examenService.TrouverEleveParEleve(this.id,"compo française","SEMESTER1")
+       .subscribe(data => {
+               this.note_compo_compfr = data[0].note;
+         
+       }, error => 
+       console.log(error)
+       );
+       //Compo pc
+       this.examenService.TrouverEleveParEleve(this.id,"EPS","SEMESTER1")
+       .subscribe(data => {
+               this.note_compo_eps = data[0].note;
+         
+       }, error => 
+       console.log(error)
+       );
+       //Compo pc
+       this.examenService.TrouverEleveParEleve(this.id,"orthographe","SEMESTER1")
+       .subscribe(data => {
+               this.note_compo_ort = data[0].note;
+         
+       }, error => 
+       console.log(error)
+       );
+       //Compo tsq
+       this.examenService.TrouverEleveParEleve(this.id,"TSQ","SEMESTER1")
+       .subscribe(data => {
+               this.note_compo_tsq = data[0].note;
+         
+       }, error => 
+       console.log(error)
+       );
+       //Compo hg
+       this.examenService.TrouverEleveParEleve(this.id,"HG","SEMESTER1")
+       .subscribe(data => {
+               this.note_compo_hg = data[0].note;
+         
+       }, error => 
+       console.log(error)
+       );
+        //Compo ec
+        this.examenService.TrouverEleveParEleve(this.id,"EC","SEMESTER1")
+        .subscribe(data => {
+                this.note_compo_ec = data[0].note;
+          
+        }, error => 
+        console.log(error)
+        );
+      
+      
+      
+      
       
       
      
@@ -91,56 +181,19 @@ export class BulletinComponent implements OnInit {
 
             })
           }
-      
+          
+          
 
            
       }, error => 
       console.log(error)
 
     );
+   
   }
   
 
-  Note_Examen(matiere){
-
-    this.examenService.TrouverEleveParEleve(this.id,matiere,"SEMESTER1")
-      .subscribe(data => {
-        if(matiere == "Math"){
-          this.moyenne_examen.push({
-              "matiere":matiere,
-              "noteExamen":data[0].note,
-              "coef": 3
-
-          })
-    }
-    else 
-    if(matiere == "Anglais" || matiere == "Espagnol" || matiere == "science physique" 
-        || matiere =="compo française" || matiere =="EPS" || matiere =="SVT"){
-
-      this.moyenne_examen.push({
-          "matiere":matiere,
-          "noteExamen":data[0].note,
-          "coef": 2
-
-      })
-  }
-  else
-      if(matiere == "orthographe" || matiere =="TSQ"){
-        this.moyenne_examen.push({
-            "matiere":matiere,
-            "noteExamen":data[0].note,
-            "coef": 1
-
-        })
-      }
-  
-              
-              
-        
-      }, error => 
-      console.log(error)
-      );
-   }
+ 
 
 
   
