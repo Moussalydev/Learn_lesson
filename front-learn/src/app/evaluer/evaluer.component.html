@@ -1,1 +1,33 @@
-<p>evaluer works!</p>
+<div class="header">
+
+    <p style="text-align: center;">  Ajout de notes de devoir </p>
+
+</div>
+<div class="container" style="padding:3.5%;">
+
+<form [formGroup]="evalForm">
+    <div class="form-group">
+        <label for="subject">Matiere</label>
+        <select class="form-control" id="subject" formControlName="subject">
+            <option>Math</option>
+            <option>Anglais</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="semestre">Semestre</label>
+        <select class="form-control" id="semestre" formControlName="semestre">
+            <option>SEMESTER1</option>
+            <option>SEMESTER2</option>
+        </select>
+      </div>
+
+    <div class="form-group">
+      <label for="birthday">Note</label>
+      <input type="text" id="note" class="form-control" formControlName="note" placeholder="Note /20">
+    </div>
+    
+  
+    <button type="submit" [disabled]="evalForm.invalid" class="btn btn-primary" (click)="onSubmitForm()">Soumettre</button>
+  </form>
+</div>

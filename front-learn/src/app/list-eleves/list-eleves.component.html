@@ -10,6 +10,7 @@
                 <th> Date de naissance </th>
                 <th> Lieu de naissance </th>
                 <th> Niveau </th>
+                <th> Noter </th>
             </tr>
         </thead>
         <tbody>
@@ -20,6 +21,9 @@
                 <td> {{eleve.date_naissance | date}} </td>
                 <td> {{eleve.lieu_naissance}} </td>
                 <td> {{eleve.niveau}}</td>
+                <td> 
+                    <button class="btn btn-info" (click)="Noter(eleve)"> Noter </button>
+                </td>
 
             </tr>
         </tbody>

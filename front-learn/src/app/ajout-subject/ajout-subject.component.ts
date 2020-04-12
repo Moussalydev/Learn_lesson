@@ -73,7 +73,7 @@ export class AjoutSubjectComponent implements OnInit {
       
     );
     
-       
+      this.sendToBack(speciality) 
       
   }
 

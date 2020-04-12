@@ -39,6 +39,15 @@ public class SpecialityService {
         return ResponseEntity.ok(updatedSpeciality);
     }
 
+    public ResponseEntity<Speciality> FindByName(@PathVariable(value = "nom_speciality") String nom_speciality)
+            throws ResourceNotFoundException {
+        Speciality speciality = specialityRepository.findSpeciality(nom_speciality);
+
+        return ResponseEntity.ok().body(speciality);
+    }
+
+
+
 
 
 

@@ -7,5 +7,7 @@ import java.math.BigInteger;
 
 public interface EleveRepository extends MongoRepository<Eleve, BigInteger> {
 
+    Eleve findEleveByMatricule(String matricule);
+
 
 }

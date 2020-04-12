@@ -35,6 +35,9 @@ import { SignupComponent } from './signup/signup.component';
     AppRoutingModule,
     NgbModule
   ],
+  entryComponents: [
+    EvaluerComponent
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

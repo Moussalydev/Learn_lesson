@@ -34,7 +34,7 @@ export class EleveService {
   }
 
   TrouverEleveParId(matricule: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/${matricule}`);
+    return this.http.get(`${this.baseUrl}eleve/${matricule}`);
   }
  
   EditerEleve(matricule: string, value: any): Observable<Object> {

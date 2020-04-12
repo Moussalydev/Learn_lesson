@@ -7,15 +7,14 @@ import {AppSettings} from '../services/serveur'
 @Injectable({
   providedIn: 'root'
 })
-export class SpecialityService {
+export class EvaluationService {
 
   public baseUrl = AppSettings.API_ENDPOINT+AppSettings.base_api;
 
   
 
   constructor(
-    private http: HttpClient
-    ) {}
+    private http: HttpClient) {}
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -25,18 +24,20 @@ export class SpecialityService {
     })
 };
 
- AfficherTouteMatiere(): Observable<any> {
-    return this.http.get(`${this.baseUrl}list-subject`,this.httpOptions);
+ AfficherLesNotes(): Observable<any> {
+    return this.http.get(`${this.baseUrl}list-evaluation`);
   }
 
-  AjouterMatiere(matiere: Object): Observable<Object> {
+  AjouterNote(eleve: Object): Observable<Object> {
 
-    return this.http.post(`${this.baseUrl}add-subject`,matiere,this.httpOptions);
+    return this.http.post(`${this.baseUrl}add-evaluation`,eleve);
   }
-  FindSubject(subject: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}subject/${subject}`,this.httpOptions);
+
+  TrouverEleveParEleve(matricule: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}evaluation-eleve/${matricule}`);
   }
-  
+ 
+ 
 
   
   
