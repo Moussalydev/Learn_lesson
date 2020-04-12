@@ -7,7 +7,7 @@ import {AppSettings} from '../services/serveur'
 @Injectable({
   providedIn: 'root'
 })
-export class EvaluationService {
+export class ExamenService {
 
   public baseUrl = AppSettings.API_ENDPOINT+AppSettings.base_api;
 
@@ -23,19 +23,21 @@ export class EvaluationService {
     
     })
 };
+AjouterNoteExamen(eleve: Object): Observable<Object> {
+
+    return this.http.post(`${this.baseUrl}add-examen`,eleve);
+  }
+
+
+TrouverEleveParEleve(matricule: string,matiere:string,semestre:string): Observable<any> {
+    return this.http.get(`${this.baseUrl}note-examen`+"?"+"matricule="+matricule+"&"+"matiere="+matiere+"&"+"semestre="+semestre);
+  }
 
  AfficherLesNotes(): Observable<any> {
-    return this.http.get(`${this.baseUrl}list-evaluation`);
+    return this.http.get(`${this.baseUrl}list-examen`);
   }
 
-  AjouterNote(eleve: Object): Observable<Object> {
-
-    return this.http.post(`${this.baseUrl}add-evaluation`,eleve);
-  }
-
-  TrouverEleveParEleve(matricule: string,matiere:string,semestre:string): Observable<any> {
-    return this.http.get(`${this.baseUrl}cumul`+"?"+"matricule="+matricule+"&"+"matiere="+matiere+"&"+"semestre="+semestre);
-  }
+  
  
  
 

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { EleveService } from '../services/eleves.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EvaluerComponent } from '../evaluer/evaluer.component';
+import { AjoutExamenComponent } from '../ajout-examen/ajout-examen.component';
 
 @Component({
   selector: 'app-list-eleves',
@@ -53,10 +54,28 @@ export class ListElevesComponent implements OnInit {
     modalRef.componentInstance.data = data;
     modalRef.componentInstance.modalRef = modalRef;
   }
+
+  OpenDialogCompo(data){
+    const modalRef = this.modalService.open(AjoutExamenComponent,
+        {
+         centered: this.centered,
+  
+        }
+    );
+  
+    modalRef.componentInstance.name = 'Erreur lors de la sauvegarde de votre avis';
+    modalRef.componentInstance.data = data;
+    modalRef.componentInstance.modalRef = modalRef;
+  }
   
 
   Noter(eleve){
     this.OpenDialog(eleve)
+
+  }
+
+  NoterCompo(eleve){
+    this.OpenDialogCompo(eleve)
 
   }
 

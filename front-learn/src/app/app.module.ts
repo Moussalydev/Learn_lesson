@@ -4,15 +4,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
 import { HttpClientModule } from '@angular/common/http';
-
 import { ConnexionComponent } from './connexion/connexion.component';
 import { EvaluerComponent } from './evaluer/evaluer.component';
 import { ListElevesComponent } from './list-eleves/list-eleves.component';
 import { AjoutElevesComponent } from './ajout-eleves/ajout-eleves.component';
 import { AjoutSubjectComponent } from './ajout-subject/ajout-subject.component';
 import { SignupComponent } from './signup/signup.component';
+import { BulletinComponent } from './bulletin/bulletin.component';
+import { AjoutExamenComponent } from './ajout-examen/ajout-examen.component';
+import { Bulletin2Component } from './bulletin2/bulletin2.component';
 
 
 
@@ -25,6 +26,9 @@ import { SignupComponent } from './signup/signup.component';
     AjoutElevesComponent,
     AjoutSubjectComponent,
     SignupComponent,
+    BulletinComponent,
+    AjoutExamenComponent,
+    Bulletin2Component,
   
   ],
   imports: [
@@ -36,7 +40,8 @@ import { SignupComponent } from './signup/signup.component';
     NgbModule
   ],
   entryComponents: [
-    EvaluerComponent
+    EvaluerComponent,
+    AjoutExamenComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -32,7 +32,7 @@ public class EvaluationController {
 
     }
     @GetMapping("/cumul")
-    public List<Evaluation> CumulEvaluationSemester1(
+    public List<Evaluation> CumulEvaluationSemester(
             @RequestParam String matricule,
             @RequestParam String matiere,
             @RequestParam String semestre
