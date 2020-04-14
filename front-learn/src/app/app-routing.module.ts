@@ -8,6 +8,8 @@ import { AjoutSubjectComponent } from './ajout-subject/ajout-subject.component';
 import { SignupComponent } from './signup/signup.component';
 import { BulletinComponent } from './bulletin/bulletin.component';
 import { AjoutExamenComponent } from './ajout-examen/ajout-examen.component';
+import { AfficherDevoirsComponent } from './afficher-devoirs/afficher-devoirs.component';
+
 
 
 
@@ -22,6 +24,7 @@ const routes: Routes = [
   {path:'signin',component: ConnexionComponent},
   {path:'signup',component: SignupComponent},
   {path:'list-eleves',component: ListElevesComponent},
+  {path:'devoirs/:id',component:AfficherDevoirsComponent},
   {path:'bulletin/:id',component: BulletinComponent},
   {path:'ajout-eleves',component: AjoutElevesComponent},
   {path:'ajout-matiere',component: AjoutSubjectComponent},

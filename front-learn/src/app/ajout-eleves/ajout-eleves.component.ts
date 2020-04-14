@@ -31,6 +31,8 @@ export class AjoutElevesComponent implements OnInit {
       matricule: ['', Validators.required],
       prenom: ['', Validators.required],
       nom:['', Validators.required],
+      dateNaissance:['', Validators.required],
+      lieuNaissance:['', Validators.required],
       niveau:['', Validators.required],
     });
     
@@ -76,8 +78,8 @@ export class AjoutElevesComponent implements OnInit {
       formValue['matricule'],
       formValue['prenom'],
       formValue['nom'],
-      formValue['date_naissance'],
-      formValue['lieu_naissance'],
+      formValue['dateNaissance'],
+      formValue['lieuNaissance'],
       formValue['niveau'],
      
     );

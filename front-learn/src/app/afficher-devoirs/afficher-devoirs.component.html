@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row">
+    <div class="col-md-8" style="margin: auto;">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th> Matiere </th>
+                <th> Note </th>
+                <th> Semestre </th>
+                <th> Action  </th>
+
+               
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let devoir of devoirs">
+                <td> {{devoir.speciality.nom_speciality}}</td>
+                <td> {{devoir.note}} </td>
+               <td> {{devoir.semestre}}</td>
+               <td><i class="fas fa-trash"></i> </td>
+               
+            </tr>
+        </tbody>
+
+
+    </table>
+
+</div>
+</div>
+</div>

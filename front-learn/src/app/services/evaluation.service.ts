@@ -37,7 +37,12 @@ export class EvaluationService {
     return this.http.get(`${this.baseUrl}cumul`+"?"+"matricule="+matricule+"&"+"matiere="+matiere+"&"+"semestre="+semestre);
   }
  
- 
+  deleteEvaluation(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}devoir/${id}`);
+  }
+  AfficherDevoirDeLeleve(matricule: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}evaluation/${matricule}`);
+  }
 
   
   

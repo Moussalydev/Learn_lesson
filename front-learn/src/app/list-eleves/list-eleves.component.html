@@ -19,8 +19,8 @@
                 <td> {{eleve.matricule}}</td>
                 <td> {{eleve.prenom}} </td>
                 <td> {{eleve.nom}} </td>
-                <td> {{eleve.date_naissance | date}} </td>
-                <td> {{eleve.lieu_naissance}} </td>
+                <td> {{eleve.dateNaissance | date}} </td>
+                <td> {{eleve.lieuNaissance}} </td>
                 <td> {{eleve.niveau}}</td>
                 <td> 
                     <button class="btn btn-info" (click)="Noter(eleve)"> Note devoir </button>

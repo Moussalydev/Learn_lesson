@@ -14,28 +14,28 @@ public class Eleve {
     private String matricule;
     private String prenom;
     private String nom;
-    private Date date_naissance;
-    private String lieu_naissance;
+    private Date dateNaissance;
+    private String lieuNaissance;
     private String niveau;
 
     public BigInteger getId() {
         return id;
     }
 
-    public Date getDate_naissance() {
-        return date_naissance;
+    public Date getDateNaissance() {
+        return dateNaissance;
     }
 
-    public void setDate_naissance(Date date_naissance) {
-        this.date_naissance = date_naissance;
+    public void setDateNaissance(Date dateNaissance) {
+        this.dateNaissance = dateNaissance;
     }
 
-    public String getLieu_naissance() {
-        return lieu_naissance;
+    public String getLieuNaissance() {
+        return lieuNaissance;
     }
 
-    public void setLieu_naissance(String lieu_naissance) {
-        this.lieu_naissance = lieu_naissance;
+    public void setLieuNaissance(String lieuNaissance) {
+        this.lieuNaissance = lieuNaissance;
     }
 
     public String getMatricule() {
@@ -80,9 +80,9 @@ public class Eleve {
                 "id=" + id +
                 ", matricule='" + matricule + '\'' +
                 ", prenom='" + prenom + '\'' +
-                ", date_naissance=" + date_naissance +
-                ", lieu_naissance='" + lieu_naissance + '\'' +
                 ", nom='" + nom + '\'' +
+                ", dateNaissance=" + dateNaissance +
+                ", lieuNaissance='" + lieuNaissance + '\'' +
                 ", niveau='" + niveau + '\'' +
                 '}';
     }
