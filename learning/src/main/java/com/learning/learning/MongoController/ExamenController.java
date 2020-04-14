@@ -1,8 +1,10 @@
 package com.learning.learning.MongoController;
 
 import com.learning.learning.Entities.Examen;
+import com.learning.learning.Exception.ResourceNotFoundException;
 import com.learning.learning.services.ExamenService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -25,14 +27,25 @@ public class ExamenController {
 
     }
     @GetMapping("/note-examen")
-    public List<Examen> NoteExamen(
+    public Examen NoteExamen(
             @RequestParam String matricule,
             @RequestParam String matiere,
             @RequestParam String semestre
     )
     {
-        return examenService.NoteExamen(matricule,matiere,semestre);
+        return examenService.TrouverExamen(matricule,matiere,semestre);
 
+
+    }
+    @PutMapping("/note-examen")
+    public ResponseEntity<Examen> Editer_examen(
+            @RequestParam String matricule,
+            @RequestParam String matiere,
+            @RequestParam String semestre,
+            Examen examenDetails)
+
+            throws ResourceNotFoundException {
+        return examenService.Editer_examen(matricule,matiere,semestre,examenDetails);
 
     }
 }

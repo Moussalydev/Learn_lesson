@@ -33,8 +33,8 @@ export class BulletinComponent implements OnInit {
   ngOnInit(): void {
 
       this.id = this.route.snapshot.params['id'];
-      this.Moyenne_control_continu("Anglais");
-      this.Moyenne_control_continu("Math");  
+      //this.Moyenne_control_continu("Anglais");
+      console.log(this.Moyenne_control_continu("Math"));  
 
       
 
@@ -61,33 +61,14 @@ export class BulletinComponent implements OnInit {
   
 
   Moyenne_control_continu(matiere){
+   
+   var mynote :number;
     
     this.evaluationService.TrouverEleveParEleve(this.id,matiere,"SEMESTER1")
     .subscribe(data => {
-        if(matiere == "Math"){
-                this.moyenne_control_continu.push({
-                        "matiere":matiere,
-                        "noteDevoir":data[0].note,
-                        "coef": 3,
-                        "noteExamen":0
-
-                })
-        }
-        if(matiere == "Anglais" || matiere == "Espagnol" || matiere == "science physique" 
-            || matiere =="compo française" || matiere =="EPS" || matiere =="SVT"){
-                this.moyenne_control_continu.push({
-                        "matiere":matiere,
-                        "noteDevoir":data[0].note,
-                        "coef": 2,
-                        "noteExamen":0
-
-                })
-                
-            
-           }
-           
-           
         
+                mynote= data[0].note;
+                //subject.next(mynote);
        }
       
       , error => 

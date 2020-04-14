@@ -2,6 +2,7 @@ package com.learning.learning.services;
 
 import com.learning.learning.Entities.Evaluation;
 import com.learning.learning.Entities.Examen;
+import com.learning.learning.Exception.ResourceNotFoundException;
 import com.learning.learning.RepoMongo.ExamenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -10,6 +11,7 @@ import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.aggregation.GroupOperation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -36,7 +38,7 @@ public class ExamenService {
         return examenRepository.findAll();
     }
 
-    public List<Examen> NoteExamen(String matricule,String matiere, String semestre){
+    public Examen NoteExamen(String matricule,String matiere, String semestre){
         Query query = new Query();
         query.addCriteria(
                 Criteria.where("eleve.matricule").is(matricule)
@@ -44,7 +46,29 @@ public class ExamenService {
                 .and("speciality.nom_speciality").is(matiere)
         );
 
-        return mongoTemplate.find(query, Examen.class);
+        return mongoTemplate.find(query, Examen.class).get(0);
+    }
+
+    public ResponseEntity<Examen> Editer_examen(
+            String matricule,
+            String matiere,
+            String semestre,
+            Examen examenDetails)
+
+            throws ResourceNotFoundException {
+        Examen examen = NoteExamen(
+                matricule,matiere,semestre);
+
+        examen.setNotedevoir(examenDetails.getNotedevoir());
+
+        final Examen updatedExamen = examenRepository.save(examen);
+        return ResponseEntity.ok(updatedExamen);
+    }
+
+
+    public Examen TrouverExamen(String matricule,String matiere,String semestre){
+         return NoteExamen(matricule,matiere,semestre);
+
     }
 
 }

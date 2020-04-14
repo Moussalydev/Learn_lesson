@@ -14,11 +14,20 @@ public class Examen {
     private BigInteger id;
     private Eleve eleve;
     private Speciality speciality;
+    private double notedevoir;
     private double note;
     private SemesterType semestre;
 
     public BigInteger getId() {
         return id;
+    }
+
+    public double getNotedevoir() {
+        return notedevoir;
+    }
+
+    public void setNotedevoir(double notedevoir) {
+        this.notedevoir = notedevoir;
     }
 
     public void setId(BigInteger id) {
@@ -63,6 +72,7 @@ public class Examen {
                 "id=" + id +
                 ", eleve=" + eleve +
                 ", speciality=" + speciality +
+                ", notedevoir=" + notedevoir +
                 ", note=" + note +
                 ", semestre=" + semestre +
                 '}';

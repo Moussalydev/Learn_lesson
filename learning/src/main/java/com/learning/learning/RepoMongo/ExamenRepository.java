@@ -7,8 +7,11 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import java.math.BigInteger;
+import java.util.List;
 
 
 public interface ExamenRepository extends MongoRepository<Examen, BigInteger> {
+
+
 
 }

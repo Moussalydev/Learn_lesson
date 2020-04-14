@@ -7,6 +7,7 @@ import { Evaluer } from '../models/evaluer.model';
 import { SpecialityService } from '../services/speciality.service';
 import { EvaluationService } from '../services/evaluation.service';
 import { ExamenService } from '../services/examen.service';
+import { Examen } from '../models/ajout.exam';
 
 @Component({
   selector: 'app-ajout-examen',
@@ -22,7 +23,8 @@ export class AjoutExamenComponent implements OnInit {
       private router: Router,
       private http: HttpClient,
       private specialityService:SpecialityService,
-      private examenService:ExamenService
+      private examenService:ExamenService,
+      private evaluationService:EvaluationService
 
     ) { }
   subject:any;
@@ -33,6 +35,7 @@ export class AjoutExamenComponent implements OnInit {
   public Evaluation ={
     "eleve":{},
     "speciality":{},
+    "notedevoir":0,
     "note":0,
     "semestre":""
 
@@ -42,6 +45,7 @@ export class AjoutExamenComponent implements OnInit {
     this.evalForm = this.formBuilder.group({
       subject: ['', Validators.required],
       semestre: ['', Validators.required],
+      notedevoir:'',
       note:['', Validators.required],
      
     });
@@ -94,10 +98,11 @@ export class AjoutExamenComponent implements OnInit {
   onSubmitForm() {
 
     const formValue = this.evalForm.value;
-    const evaluer = new Evaluer(
+    const evaluer = new Examen(
       formValue['subject'],
       formValue['semestre'],
-      formValue['note']
+      formValue['notedevoir'],
+      formValue['note'],
       
     );
     
@@ -109,8 +114,26 @@ export class AjoutExamenComponent implements OnInit {
           this.Evaluation.note = evaluer.note;
           this.Evaluation.semestre = evaluer.semestre;
 
-          this.sendToBack(this.Evaluation)
           
+          
+            var mynote :number;
+             
+             this.evaluationService.TrouverEleveParEleve(this.data.matricule,evaluer.subject,"SEMESTER1")
+             .subscribe(data => {
+                        
+                         this.Evaluation.notedevoir =Number(data[0].note);
+                         console.log(this.Evaluation)
+                        // this.sendToBack(this.Evaluation)
+                }
+               
+               , error => 
+               console.log(error)
+         
+             );
+             
+             
+           
+            
 
           //Poster la note de l'eleve
           
