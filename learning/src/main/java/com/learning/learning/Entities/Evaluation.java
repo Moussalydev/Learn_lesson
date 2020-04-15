@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.math.BigInteger;
+import java.time.LocalDate;
+import java.util.Date;
 
 @Document(collection = "evaluations")
 public class Evaluation {
@@ -15,6 +17,7 @@ public class Evaluation {
     private Eleve eleve;
     private Speciality speciality;
     private double note;
+    private LocalDate date;
     private SemesterType semestre;
 
     public BigInteger getId() {
@@ -27,6 +30,14 @@ public class Evaluation {
 
     public void setNote(double note) {
         this.note = note;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public void setId(BigInteger id) {
@@ -64,6 +75,7 @@ public class Evaluation {
                 ", eleve=" + eleve +
                 ", speciality=" + speciality +
                 ", note=" + note +
+                ", date=" + date +
                 ", semestre=" + semestre +
                 '}';
     }

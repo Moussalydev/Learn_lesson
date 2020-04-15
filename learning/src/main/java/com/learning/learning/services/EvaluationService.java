@@ -1,6 +1,7 @@
 package com.learning.learning.services;
 
 import com.learning.learning.Entities.Evaluation;
+import com.learning.learning.Entities.Examen;
 import com.learning.learning.Exception.ResourceNotFoundException;
 import com.learning.learning.RepoMongo.EvaluationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.aggregation.GroupOperation;
 import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,10 +19,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
 import java.math.BigInteger;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
 
@@ -43,7 +44,7 @@ public class EvaluationService {
         return evaluationRepository.findAll();
     }
 
-    public List<Evaluation> CumulDevoir(String matricule,String matiere, String semestre){
+    public Evaluation CumulDevoir(String matricule,String matiere, String semestre){
 
         GroupOperation groupByStateAndSumPop = group("id")
                 .avg("note").as("note");
@@ -59,7 +60,7 @@ public class EvaluationService {
         AggregationResults<Evaluation> result = mongoTemplate.aggregate(
                 aggregation, "evaluations", Evaluation.class);
 
-        return result.getMappedResults();
+        return result.getMappedResults().get(0);
     }
     public ResponseEntity<List<Evaluation>> FindByMatricule(String matricule)
             throws ResourceNotFoundException {
@@ -74,15 +75,39 @@ public class EvaluationService {
 
         return ResponseEntity.ok().body(evaluation);
     }
-    public Map<String, Boolean> deleteNote(BigInteger evalid)
+    public Map<String, Boolean> deleteNote(
+            String matricule,
+            String matiere,
+            String semestre,
+            String date
+        )
+
             throws ResourceNotFoundException {
-        Evaluation evaluation = evaluationRepository.findById(evalid)
-                .orElseThrow(() -> new ResourceNotFoundException("Devoir non disponible" + evalid));
+
+        Evaluation evaluation = FindDevoirDate(matricule,matiere,semestre,date);
+                //.orElseThrow(() -> new ResourceNotFoundException("Devoir non disponible" + evalid));
 
         evaluationRepository.delete(evaluation);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return response;
+    }
+
+
+    public Evaluation FindDevoirDate(String matricule, String matiere, String semestre, String date){
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-dd");
+        LocalDate ldate = LocalDate.parse(date, formatter);
+
+        Query query = new Query();
+        query.addCriteria(
+                Criteria.where("eleve.matricule").is(matricule)
+                        .and("semestre").is(semestre)
+                        .and("speciality.nom_speciality").is(matiere)
+                        .and("date").is(ldate)
+        );
+
+        return mongoTemplate.find(query, Evaluation.class).get(0);
     }
 
 

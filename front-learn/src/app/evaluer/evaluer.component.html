@@ -9,15 +9,7 @@
     <div class="form-group">
         <label for="subject">Matiere</label>
         <select class="form-control" id="subject" formControlName="subject">
-            <option>Math</option>
-            <option>Anglais</option>
-            <option>Espagnol</option>
-            <option>science physique</option>
-            <option>compo française</option>
-            <option>EPS</option>
-            <option>orthographe</option>
-            <option>TSQ</option>
-            <option>SVT</option>
+            <option *ngFor="let subject of subjects"> {{subject.nom_speciality}} </option>
             
         </select>
       </div>
@@ -33,6 +25,10 @@
     <div class="form-group">
       <label for="birthday">Note</label>
       <input type="text" id="note" class="form-control" formControlName="note" placeholder="Note /20">
+    </div>
+    <div class="form-group">
+      <label for="dte">Date</label>
+      <input type="date" id="date" class="form-control" formControlName="date" placeholder="Date">
     </div>
     
   

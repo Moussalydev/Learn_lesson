@@ -15,6 +15,7 @@ import { EvaluationService } from '../services/evaluation.service';
 export class EvaluerComponent implements OnInit {
 
   evalForm: FormGroup;
+  public subjects:any;
 
   constructor(
       private formBuilder: FormBuilder,
@@ -33,6 +34,7 @@ export class EvaluerComponent implements OnInit {
     "eleve":{},
     "speciality":{},
     "note":0,
+    "date":new Date(),
     "semestre":""
 
   }
@@ -41,22 +43,33 @@ export class EvaluerComponent implements OnInit {
     this.evalForm = this.formBuilder.group({
       subject: ['', Validators.required],
       semestre: ['', Validators.required],
+      date: '',
       note:['', Validators.required],
      
     });
     
-    
-
-    
+  }
+  FindSubjects(){
+    this.specialityService.AfficherTouteMatiere().subscribe(
+      data => {
+        this.subjects = data;
+      },
+        (error) => {
+          console.log(error)
+          
+        }
+    );
   }
 
   ngOnInit(): void {
 
     this.Evaluation.eleve = this.data;
+    this.FindSubjects()
 
     this.initForm()
 
   }
+
   
 
   public succes(){
@@ -96,6 +109,7 @@ export class EvaluerComponent implements OnInit {
     const evaluer = new Evaluer(
       formValue['subject'],
       formValue['semestre'],
+      formValue['date'],
       formValue['note']
       
     );
@@ -107,6 +121,7 @@ export class EvaluerComponent implements OnInit {
           this.Evaluation.speciality = data;
           this.Evaluation.note = evaluer.note;
           this.Evaluation.semestre = evaluer.semestre;
+          this.Evaluation.date = evaluer.date;
 
           this.sendToBack(this.Evaluation)
           

@@ -37,11 +37,16 @@ export class EvaluationService {
     return this.http.get(`${this.baseUrl}cumul`+"?"+"matricule="+matricule+"&"+"matiere="+matiere+"&"+"semestre="+semestre);
   }
  
-  deleteEvaluation(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}devoir/${id}`);
+  deleteEvaluation(matricule: string,matiere:string,semestre:string,date:Date): Observable<any> {
+    return this.http.delete(`${this.baseUrl}delete-eval`+"?"+"matricule="+matricule+"&"+"matiere="+matiere
+    +"&"+"semestre="+semestre +"&"+"date="+date);
   }
   AfficherDevoirDeLeleve(matricule: string): Observable<any> {
     return this.http.get(`${this.baseUrl}evaluation/${matricule}`);
+  }
+  TrouverDevoirDate(matricule: string,matiere:string,semestre:string,date:Date): Observable<any> {
+    return this.http.get(`${this.baseUrl}devoir-date`+"?"+"matricule="+matricule+"&"+"matiere="+matiere
+    +"&"+"semestre="+semestre +"&"+"date="+date);
   }
 
   

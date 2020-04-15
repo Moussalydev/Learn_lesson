@@ -27,6 +27,10 @@ AjouterNoteExamen(eleve: Object): Observable<Object> {
 
     return this.http.post(`${this.baseUrl}add-examen`,eleve);
   }
+EditExamen(matricule: string,matiere:string,semestre, value: any): Observable<Object> {
+  return this.http.put(`${this.baseUrl}note-examen`+"?"+"matricule="+matricule+"&"+"matiere="+matiere
+    +"&"+"semestre="+semestre,value);
+}
 
 
 TrouverEleveParEleve(matricule: string,matiere:string,semestre:string): Observable<any> {

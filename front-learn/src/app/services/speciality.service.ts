@@ -26,7 +26,7 @@ export class SpecialityService {
 };
 
  AfficherTouteMatiere(): Observable<any> {
-    return this.http.get(`${this.baseUrl}list-subject`,this.httpOptions);
+    return this.http.get(`${this.baseUrl}list-subject`);
   }
 
   AjouterMatiere(matiere: Object): Observable<Object> {

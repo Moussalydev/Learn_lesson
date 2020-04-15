@@ -3,6 +3,7 @@ export class Examen {
       public subject: string,
       public semestre: string,
       public notedevoir:string,
+      public dateExamen:Date,
       public note: number,
       
     ) {}

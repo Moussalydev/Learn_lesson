@@ -7,6 +7,7 @@
                 <th> Matiere </th>
                 <th> Note </th>
                 <th> Semestre </th>
+                <th> Date </th>
                 <th> Action  </th>
 
                
@@ -17,7 +18,8 @@
                 <td> {{devoir.speciality.nom_speciality}}</td>
                 <td> {{devoir.note}} </td>
                <td> {{devoir.semestre}}</td>
-               <td><i class="fas fa-trash"></i> </td>
+               <td> {{devoir.date | date}}</td>
+               <td><button class="btn btn-info" (click)="delete(devoir)"> supprimer</button> </td>
                
             </tr>
         </tbody>

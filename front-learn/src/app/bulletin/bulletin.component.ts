@@ -13,42 +13,28 @@ export class BulletinComponent implements OnInit {
   id:string;
   constructor(
         private route:ActivatedRoute, 
-        private evaluationService:EvaluationService,
         private examenService:ExamenService,
         private eleveService:EleveService
     ) { }
   
-  moyenne_control_continu =[];
   note_examen =[]
 
   eleve:any;
   
 
-  
 
-
- 
-  
 
   ngOnInit(): void {
 
       this.id = this.route.snapshot.params['id'];
-      //this.Moyenne_control_continu("Anglais");
-      console.log(this.Moyenne_control_continu("Math"));  
+       this.Find_Eleve(this.id)
 
       
 
 
      
   }
-  filterDuplicates(data) {
-        let unique = [];
-        if(data.length >= 1)
-                        unique = [...new Set(data)];
-
-                return unique;
-    
- }
+  
  Find_Eleve(matricule){
     this.eleveService.TrouverEleveParId(matricule)
       .subscribe(data => {
@@ -60,14 +46,14 @@ export class BulletinComponent implements OnInit {
   }
   
 
-  Moyenne_control_continu(matiere){
+  Moyenne_final(matiere){
    
    var mynote :number;
     
-    this.evaluationService.TrouverEleveParEleve(this.id,matiere,"SEMESTER1")
+    this.examenService.TrouverEleveParEleve(this.id,matiere,"SEMESTER1")
     .subscribe(data => {
         
-                mynote= data[0].note;
+                //mynote= data[0].note;
                 //subject.next(mynote);
        }
       

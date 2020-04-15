@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -33,7 +34,7 @@ public class EvaluationController {
 
     }
     @GetMapping("/cumul")
-    public List<Evaluation> CumulEvaluationSemester(
+    public Evaluation CumulEvaluationSemester(
             @RequestParam String matricule,
             @RequestParam String matiere,
             @RequestParam String semestre
@@ -52,9 +53,26 @@ public class EvaluationController {
         return evaluationService.FindById(id);
 
     }
-    @DeleteMapping("/delete-eval/{id}")
-    public Map<String, Boolean> deleteNote(BigInteger id) throws ResourceNotFoundException {
-        return evaluationService.deleteNote(id);
+    @DeleteMapping("/delete-eval")
+    public Map<String, Boolean> deleteNote(
+            @RequestParam String matricule,
+            @RequestParam String matiere,
+            @RequestParam String semestre,
+            @RequestParam String date
+    ) throws ResourceNotFoundException {
+        return evaluationService.deleteNote(matricule,matiere,semestre,date);
+
+    }
+
+    @GetMapping("/devoir-date")
+    public Evaluation Devoir(
+            @RequestParam String matricule,
+            @RequestParam String matiere,
+            @RequestParam String semestre,
+            @RequestParam String date
+    )
+    {
+        return evaluationService.FindDevoirDate(matricule,matiere,semestre,date);
 
     }
 

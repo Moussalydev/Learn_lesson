@@ -28,6 +28,7 @@ export class AjoutExamenComponent implements OnInit {
 
     ) { }
   subject:any;
+  public subjects:any;
 
   @Input() public data;
   @Input() public modalRef;
@@ -36,6 +37,7 @@ export class AjoutExamenComponent implements OnInit {
     "eleve":{},
     "speciality":{},
     "notedevoir":0,
+    "dateExamen":new Date(),
     "note":0,
     "semestre":""
 
@@ -45,6 +47,7 @@ export class AjoutExamenComponent implements OnInit {
     this.evalForm = this.formBuilder.group({
       subject: ['', Validators.required],
       semestre: ['', Validators.required],
+      dateExamen:'',
       notedevoir:'',
       note:['', Validators.required],
      
@@ -58,6 +61,7 @@ export class AjoutExamenComponent implements OnInit {
   ngOnInit(): void {
 
     this.Evaluation.eleve = this.data;
+    this.FindSubjects()
 
     this.initForm()
 
@@ -94,6 +98,17 @@ export class AjoutExamenComponent implements OnInit {
 
 
   }
+  FindSubjects(){
+    this.specialityService.AfficherTouteMatiere().subscribe(
+      data => {
+        this.subjects = data;
+      },
+        (error) => {
+          console.log(error)
+          
+        }
+    );
+  }
 
   onSubmitForm() {
 
@@ -102,6 +117,7 @@ export class AjoutExamenComponent implements OnInit {
       formValue['subject'],
       formValue['semestre'],
       formValue['notedevoir'],
+      formValue['dateExamen'],
       formValue['note'],
       
     );
@@ -113,6 +129,7 @@ export class AjoutExamenComponent implements OnInit {
           this.Evaluation.speciality = data;
           this.Evaluation.note = evaluer.note;
           this.Evaluation.semestre = evaluer.semestre;
+          this.Evaluation.dateExamen = evaluer.dateExamen;
 
           
           
@@ -121,9 +138,9 @@ export class AjoutExamenComponent implements OnInit {
              this.evaluationService.TrouverEleveParEleve(this.data.matricule,evaluer.subject,"SEMESTER1")
              .subscribe(data => {
                         
-                         this.Evaluation.notedevoir =Number(data[0].note);
-                         console.log(this.Evaluation)
-                        // this.sendToBack(this.Evaluation)
+                         this.Evaluation.notedevoir =Number(data.note);
+                        // console.log(this.Evaluation)
+                         this.sendToBack(this.Evaluation)
                 }
                
                , error => 
