@@ -42,7 +42,7 @@ public class ExamenController {
             @RequestParam String matricule,
             @RequestParam String matiere,
             @RequestParam String semestre,
-            Examen examenDetails)
+            @Valid @RequestBody Examen examenDetails)
 
             throws ResourceNotFoundException {
         return examenService.Editer_examen(matricule,matiere,semestre,examenDetails);

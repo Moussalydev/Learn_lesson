@@ -44,42 +44,46 @@ export class AfficherDevoirsComponent implements OnInit {
       );
   }
 
-  delete(devoir){
-    this.matricule = devoir.eleve.matricule;
-    this.matiere =devoir.speciality.nom_speciality;
-    this.semestre = devoir.semestre;
-    this.date = devoir.date;
+  delete(matricule,matiere,semestre,date){
+  
 
-    /* this.evaluationService.deleteEvaluation(this.matricule,this.matiere,this.semestre,this.date)
+    this.evaluationService.deleteEvaluation(matricule,matiere,semestre,date)
                 .subscribe(
                   data => {
                     console.log(data);
-                  },
-                  error => console.log(error)); */
-          
-  
+                    
+                  
+     },
     
-            var nouvelle_moyenne :number;
+     error => console.log(error)
+      
+     );
+     
+
+    
              
-            this.evaluationService.TrouverEleveParEleve(this.matricule,this.matiere,this.semestre)
+    }
+    MisAjourExamen(matricule,matiere,semestre){
+      var nouvelle_moyenne :number;
+             
+            this.evaluationService.TrouverEleveParEleve(matricule,matiere,semestre)
             .subscribe(data => {
                         
                     nouvelle_moyenne =Number(data.note);
+                    
                         
-                    this.examenService.TrouverEleveParEleve(this.matricule,this.matiere,this.semestre)
+                    this.examenService.TrouverEleveParEleve(matricule,matiere,semestre)
                     .subscribe(data => {
 
-                                data.notedevoir = nouvelle_moyenne;
+                              data.notedevoir = nouvelle_moyenne;
+                              console.log(data)
                                 
-                              this.examenService.EditExamen(this.matricule,this.matiere,this.semestre,data)
+                               this.examenService.EditExamen(matricule,matiere,semestre,data)
                                   .subscribe(data => 
-                                    console.log("mis a jour avec succes"), 
+                                      console.log("mis a jour avec succes"), 
                                     error => 
-                                    console.log("erreur lors de la mis à jour")
-                                    ); 
-                                    
-                                   
-                                
+                                      console.log("erreur lors de la mis à jour")
+                            );      
                         }
                       
                       , error => 
@@ -93,7 +97,7 @@ export class AfficherDevoirsComponent implements OnInit {
               console.log(error)
         
             );
-                  
-      }
+    }
 
 }
+

@@ -9,6 +9,7 @@
                 <th> Semestre </th>
                 <th> Date </th>
                 <th> Action  </th>
+                <th>    </th>
 
                
             </tr>
@@ -19,8 +20,8 @@
                 <td> {{devoir.note}} </td>
                <td> {{devoir.semestre}}</td>
                <td> {{devoir.date | date}}</td>
-               <td><button class="btn btn-info" (click)="delete(devoir)"> supprimer</button> </td>
-               
+               <td><button class="btn btn-info" (click)="delete(devoir.eleve.matricule,devoir.speciality.nom_speciality,devoir.semestre,devoir.date)"> supprimer</button> </td>
+               <td><button class="btn btn-info" (click)="MisAjourExamen(devoir.eleve.matricule,devoir.speciality.nom_speciality,devoir.semestre)"> Actualiser examen </button> </td>
             </tr>
         </tbody>
 
