@@ -16,7 +16,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
 
@@ -69,6 +71,23 @@ public class ExamenService {
     public Examen TrouverExamen(String matricule,String matiere,String semestre){
          return NoteExamen(matricule,matiere,semestre);
 
+    }
+    public Map<String, Boolean> deleteNoteExamen(
+            String matricule,
+            String matiere,
+            String semestre
+
+    )
+
+            throws ResourceNotFoundException {
+
+        Examen examen = NoteExamen(matricule,matiere,semestre);
+        //.orElseThrow(() -> new ResourceNotFoundException("Devoir non disponible" + evalid));
+
+        examenRepository.delete(examen);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+        return response;
     }
 
 }

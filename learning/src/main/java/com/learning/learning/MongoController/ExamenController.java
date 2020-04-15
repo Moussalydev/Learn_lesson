@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping("${app.api}")
 @RestController
@@ -46,6 +47,15 @@ public class ExamenController {
 
             throws ResourceNotFoundException {
         return examenService.Editer_examen(matricule,matiere,semestre,examenDetails);
+
+    }
+    @DeleteMapping("/delete-exam")
+    public Map<String, Boolean> deleteNote(
+            @RequestParam String matricule,
+            @RequestParam String matiere,
+            @RequestParam String semestre
+    ) throws ResourceNotFoundException {
+        return examenService.deleteNoteExamen(matricule,matiere,semestre);
 
     }
 }

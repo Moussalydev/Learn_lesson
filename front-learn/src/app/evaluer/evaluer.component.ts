@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { Evaluer } from '../models/evaluer.model';
 import { SpecialityService } from '../services/speciality.service';
 import { EvaluationService } from '../services/evaluation.service';
+import { ExamenService } from '../services/examen.service';
 
 @Component({
   selector: 'app-evaluer',
@@ -16,13 +17,16 @@ export class EvaluerComponent implements OnInit {
 
   evalForm: FormGroup;
   public subjects:any;
+  public examendata:any
+  public examen_is_recorded = false;
 
   constructor(
       private formBuilder: FormBuilder,
       private router: Router,
       private http: HttpClient,
       private specialityService:SpecialityService,
-      private evaluationService:EvaluationService
+      private evaluationService:EvaluationService,
+      private examenService:ExamenService
 
     ) { }
   subject:any;
@@ -31,8 +35,12 @@ export class EvaluerComponent implements OnInit {
   @Input() public modalRef;
 
   public Evaluation ={
-    "eleve":{},
-    "speciality":{},
+    "eleve":{
+      "matricule":""
+    },
+    "speciality":{
+      "nom_speciality":""
+    },
     "note":0,
     "date":new Date(),
     "semestre":""
@@ -64,9 +72,13 @@ export class EvaluerComponent implements OnInit {
   ngOnInit(): void {
 
     this.Evaluation.eleve = this.data;
-    this.FindSubjects()
+    this.FindSubjects();
+   
 
     this.initForm()
+   
+
+   
 
   }
 
@@ -102,6 +114,54 @@ export class EvaluerComponent implements OnInit {
 
 
   }
+  VerifierExamenExist(matricule,matiere,semestre){
+    this.examenService.TrouverEleveParEleve(matricule,matiere,semestre)
+    .subscribe(data => {
+              
+              this.examendata = data;
+              console.log(data)
+        }
+      
+      , error => 
+      console.log(error)
+
+    );
+  }
+  MisAjourExamen(matricule,matiere,semestre){
+    var nouvelle_moyenne :number;
+           
+          this.evaluationService.TrouverEleveParEleve(matricule,matiere,semestre)
+          .subscribe(data => {
+                      
+                  nouvelle_moyenne =Number(data.note);
+                  
+                      
+                  this.examenService.TrouverEleveParEleve(matricule,matiere,semestre)
+                  .subscribe(data => {
+
+                            data.notedevoir = nouvelle_moyenne;
+                            console.log(data)
+                              
+                             this.examenService.EditExamen(matricule,matiere,semestre,data)
+                                .subscribe(data => 
+                                    console.log("mis a jour avec succes"), 
+                                  error => 
+                                    console.log("erreur lors de la mis à jour")
+                          );      
+                      }
+                    
+                    , error => 
+                    console.log(error)
+              
+                  );
+
+              }
+            
+            , error => 
+            console.log(error)
+      
+          );
+  }
 
   onSubmitForm() {
 
@@ -123,10 +183,27 @@ export class EvaluerComponent implements OnInit {
           this.Evaluation.semestre = evaluer.semestre;
           this.Evaluation.date = evaluer.date;
 
+    
           this.sendToBack(this.Evaluation)
+
+          this.examenService.TrouverEleveParEleve(
+            this.Evaluation.eleve.matricule,
+            this.Evaluation.speciality.nom_speciality,
+            this.Evaluation.semestre)
+          .subscribe(data => {
+                    
+                    this.MisAjourExamen(
+                      this.Evaluation.eleve.matricule,
+                      this.Evaluation.speciality.nom_speciality,
+                      this.Evaluation.semestre)
+              }
+            
+            , error => 
+            console.log("donnée existe pas dans la base !")
+      
+          );
           
 
-          //Poster la note de l'eleve
           
        
         

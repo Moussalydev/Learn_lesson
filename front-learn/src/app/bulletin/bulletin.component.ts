@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { EvaluationService } from '../services/evaluation.service';
 import { ExamenService } from '../services/examen.service';
 import { ActivatedRoute } from '@angular/router';
 import { EleveService } from '../services/eleves.service';

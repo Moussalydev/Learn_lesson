@@ -15,6 +15,7 @@ import { BulletinComponent } from './bulletin/bulletin.component';
 import { AjoutExamenComponent } from './ajout-examen/ajout-examen.component';
 import { Bulletin2Component } from './bulletin2/bulletin2.component';
 import { AfficherDevoirsComponent } from './afficher-devoirs/afficher-devoirs.component';
+import { MenuComponent } from './menu/menu.component';
 
 
 
@@ -31,6 +32,7 @@ import { AfficherDevoirsComponent } from './afficher-devoirs/afficher-devoirs.co
     AjoutExamenComponent,
     Bulletin2Component,
     AfficherDevoirsComponent,
+    MenuComponent,
   
   ],
   imports: [
