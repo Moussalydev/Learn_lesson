@@ -58,4 +58,28 @@ public class ExamenController {
         return examenService.deleteNoteExamen(matricule,matiere,semestre);
 
     }
+    @GetMapping("/examen/{eleve.matricule}")
+    public ResponseEntity<List<Examen>> FindEleve(@PathVariable(value = "eleve.matricule") String matricule) throws ResourceNotFoundException {
+        return examenService.FindByMatricule(matricule);
+
+    }
+
+    @GetMapping("/total-notes")
+    public Examen CumulEvaluationSemester(
+            @RequestParam String matricule,
+            @RequestParam String semestre
+    )
+    {
+        return examenService.TotalSemestre(matricule,semestre);
+
+    }
+    @GetMapping("/total-coef")
+    public Examen CumulTotalCoefSemester(
+            @RequestParam String matricule,
+            @RequestParam String semestre
+    )
+    {
+        return examenService.TotalCoefSemestre(matricule,semestre);
+
+    }
 }

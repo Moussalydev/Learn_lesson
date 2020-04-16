@@ -71,12 +71,14 @@ export class AfficherDevoirsComponent implements OnInit {
                         
                     nouvelle_moyenne =Number(data.note);
                     
-                        
                     this.examenService.TrouverEleveParEleve(matricule,matiere,semestre)
                     .subscribe(data => {
 
                               data.notedevoir = nouvelle_moyenne;
-                              console.log(data)
+                              data.total = nouvelle_moyenne + data.note;
+                              data.total /=2;
+                              data.total = (data.total) *(data.speciality.coef);
+
                                 
                                this.examenService.EditExamen(matricule,matiere,semestre,data)
                                   .subscribe(data => 

@@ -35,10 +35,14 @@ export class AjoutExamenComponent implements OnInit {
 
   public Evaluation ={
     "eleve":{},
-    "speciality":{},
+    "speciality":{
+      "nom_speciality":"",
+      "coef":0
+    },
     "notedevoir":0,
     "dateExamen":new Date(),
     "note":0,
+    "total":0,
     "semestre":""
 
   }
@@ -139,6 +143,9 @@ export class AjoutExamenComponent implements OnInit {
              .subscribe(data => {
                         
                          this.Evaluation.notedevoir =Number(data.note);
+                         this.Evaluation.total = this.Evaluation.notedevoir + this.Evaluation.note;
+                         this.Evaluation.total /=2;
+                         this.Evaluation.total = (this.Evaluation.total) *(this.Evaluation.speciality.coef);
                         // console.log(this.Evaluation)
                          this.sendToBack(this.Evaluation)
                 }

@@ -1,6 +1,28 @@
-<!-- <div class="container">
+<app-menu> </app-menu>
+<div style="background-color: #3C7AB3;color: white;padding: 0.125%;">
+    <h3 style="text-align: center;"> Relevés de notes</h3>
+</div>
+<br>
+<div class="container">
     <div class="row">
-        <div class="col-md-8" style="margin: auto;">
+        <div class="col-md-10" style="margin: auto;">
+            <table class="table table-striped table-bordered" style="width: 45%;">
+                <thead>
+                    <tr>
+                        <th> Prénom</th>
+                        <th> Nom</th>
+                        <th> Date et lieu de naissance</th>
+                    </tr>
+                    <tr>
+                        <td> {{eleve.prenom}} </td>
+                        <td> {{eleve.nom}} </td>
+                        <td> {{eleve.dateNaissance | date}} à  {{eleve.lieuNaissance}}</td>
+                    </tr>
+                </thead>
+                <br>
+                classe :{{eleve.niveau}}
+        
+            </table>
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
@@ -15,19 +37,29 @@
 
                 </thead>
                 <tbody>
-                    <tr *ngFor="let moycont of moyenne_control_continu">
-                        <td> {{moycont.matiere}}</td>
-                        <td> {{moycont.noteDevoir}} </td>
-                        <td>  </td>
+                    <tr *ngFor="let examen of examens">
+                        <td> {{examen.speciality.nom_speciality}}</td>
+                        <td> {{examen.notedevoir}} </td>
+                        <td> {{examen.note}} </td>
                        
-                        <td> Moyenne</td>
-                        <td> Coef</td>
-                        <td> Total </td>
+                        <td> {{((examen.note) + (examen.notedevoir))/2}}</td>
+                        <td> {{examen.speciality.coef}}</td>
+                        <td> {{examen.total}}  </td>
                         <td> Appréciation </td>
 
                     </tr>
                 </tbody>
+                <br>
+                <tfoot>
+                    <th> </th>
+                    <th> </th>
+                    <th> </th>
+                    <th> </th>
+                    <th> </th>
+                    <th>{{totals}} </th>
+                    <th> </th>
+                </tfoot>
             </table>
         </div>
     </div>
-</div> -->
+</div>

@@ -12,6 +12,6 @@ import java.util.List;
 
 public interface ExamenRepository extends MongoRepository<Examen, BigInteger> {
 
-
+    List<Examen> findExamenByEleve_Matricule(String matricule);
 
 }

@@ -62,6 +62,7 @@ public class ExamenService {
                 matricule,matiere,semestre);
 
         examen.setNotedevoir(examenDetails.getNotedevoir());
+        examen.setTotal(examenDetails.getTotal());
 
         final Examen updatedExamen = examenRepository.save(examen);
         return ResponseEntity.ok(updatedExamen);
@@ -88,6 +89,49 @@ public class ExamenService {
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return response;
+    }
+    public ResponseEntity<List<Examen>> FindByMatricule(String matricule)
+            throws ResourceNotFoundException {
+        List<Examen> examen = examenRepository.findExamenByEleve_Matricule(matricule);
+
+        return ResponseEntity.ok().body(examen);
+    }
+
+    public Examen TotalSemestre(String matricule,String semestre){
+
+        GroupOperation groupByStateAndSumPop = group("id")
+                .sum("total").as("total");
+        Aggregation aggregation = newAggregation(
+
+                match(
+                        new Criteria("eleve.matricule").is(matricule)
+                                .and("semestre").is(semestre)
+
+                ),
+
+                groupByStateAndSumPop);
+        AggregationResults<Examen> result = mongoTemplate.aggregate(
+                aggregation, "examens", Examen.class);
+
+        return result.getMappedResults().get(0);
+    }
+    public Examen TotalCoefSemestre(String matricule,String semestre){
+
+        GroupOperation groupByStateAndSumPop = group("id")
+                .sum("speciality.coef").as("coef");
+        Aggregation aggregation = newAggregation(
+
+                match(
+                        new Criteria("eleve.matricule").is(matricule)
+                                .and("semestre").is(semestre)
+
+                ),
+
+                groupByStateAndSumPop);
+        AggregationResults<Examen> result = mongoTemplate.aggregate(
+                aggregation, "examens", Examen.class);
+
+        return result.getMappedResults().get(0);
     }
 
 }

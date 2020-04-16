@@ -9,6 +9,10 @@ import { SignupComponent } from './signup/signup.component';
 import { BulletinComponent } from './bulletin/bulletin.component';
 import { AjoutExamenComponent } from './ajout-examen/ajout-examen.component';
 import { AfficherDevoirsComponent } from './afficher-devoirs/afficher-devoirs.component';
+import { AfficherexamenComponent } from './afficherexamen/afficherexamen.component';
+import { DetaileleveComponent } from './detaileleve/detaileleve.component';
+
+
 
 
 
@@ -25,7 +29,8 @@ const routes: Routes = [
   {path:'signup',component: SignupComponent},
   {path:'list-eleves',component: ListElevesComponent},
   {path:'devoirs/:id',component:AfficherDevoirsComponent},
-  {path:'bulletin/:id',component: BulletinComponent},
+  {path:'compos/:id',component:AfficherexamenComponent},
+  {path:'releve1/:id',component: BulletinComponent},
   {path:'ajout-eleves',component: AjoutElevesComponent},
   {path:'ajout-matiere',component: AjoutSubjectComponent},
   {path:'evaluer',component:EvaluerComponent},

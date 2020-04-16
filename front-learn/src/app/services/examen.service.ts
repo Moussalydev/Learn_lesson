@@ -40,6 +40,21 @@ TrouverEleveParEleve(matricule: string,matiere:string,semestre:string): Observab
  AfficherLesNotes(): Observable<any> {
     return this.http.get(`${this.baseUrl}list-examen`);
   }
+  deleteExamen(matricule: string,matiere:string,semestre): Observable<any> {
+    return this.http.delete(`${this.baseUrl}delete-exam`+"?"+"matricule="+matricule+"&"+"matiere="+matiere
+    +"&"+"semestre="+semestre);
+  }
+  AfficheExamenDeLeleve(matricule: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}examen/${matricule}`);
+  }
+
+  TotalSemestre(matricule: string,semestre:string): Observable<any> {
+    return this.http.get(`${this.baseUrl}total-notes`+"?"+"matricule="+matricule+"&"+"semestre="+semestre);
+  }
+
+  TotalCoef(matricule: string,semestre:string): Observable<any> {
+    return this.http.get(`${this.baseUrl}total-coef`+"?"+"matricule="+matricule+"&"+"semestre="+semestre);
+  }
 
   
  

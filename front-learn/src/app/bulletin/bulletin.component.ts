@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ExamenService } from '../services/examen.service';
 import { ActivatedRoute } from '@angular/router';
 import { EleveService } from '../services/eleves.service';
+import { SpecialityService } from '../services/speciality.service';
 
 @Component({
   selector: 'app-bulletin',
@@ -13,12 +14,16 @@ export class BulletinComponent implements OnInit {
   constructor(
         private route:ActivatedRoute, 
         private examenService:ExamenService,
-        private eleveService:EleveService
+        private eleveService:EleveService,
+        private specialityService:SpecialityService
     ) { }
   
   note_examen =[]
 
   eleve:any;
+  examens=[];
+  public totals :number;
+  public coefs:number;
   
 
 
@@ -27,6 +32,10 @@ export class BulletinComponent implements OnInit {
 
       this.id = this.route.snapshot.params['id'];
        this.Find_Eleve(this.id)
+
+      this.Moyenne_final(this.id);
+
+      this.TotalDuSemestre(this.id)
 
       
 
@@ -38,6 +47,7 @@ export class BulletinComponent implements OnInit {
     this.eleveService.TrouverEleveParId(matricule)
       .subscribe(data => {
             this.eleve =data;
+           
        
       }, error => 
       console.log(error)
@@ -45,23 +55,85 @@ export class BulletinComponent implements OnInit {
   }
   
 
-  Moyenne_final(matiere){
+  Moyenne_final(matricule){
    
-   var mynote :number;
     
-    this.examenService.TrouverEleveParEleve(this.id,matiere,"SEMESTER1")
+    this.examenService.TrouverEleveParEleve(matricule,"Espagnol","SEMESTER1")
     .subscribe(data => {
         
-                //mynote= data[0].note;
-                //subject.next(mynote);
+                this.examens.push(data);
        }
       
       , error => 
       console.log(error)
 
     );
+    this.examenService.TrouverEleveParEleve(matricule,"Anglais","SEMESTER1")
+    .subscribe(data => {
+        
+            this.examens.push(data);
+       }
+      
+      , error => 
+      console.log(error)
+
+    );
+   /*  this.examenService.TrouverEleveParEleve(matricule,"science physique","SEMESTER1")
+    .subscribe(data => {
+        
+            this.examens.push(data);
+       }
+      
+      , error => 
+      console.log(error)
+
+    ); */
+   /*  this.examenService.TrouverEleveParEleve(matricule,"compo française","SEMESTER1")
+    .subscribe(data => {
+        
+            this.examens.push(data);
+           
+            
+       }
+      
+      , error => 
+      console.log(error)
+
+    );
+     */
+
    
   }
+
+  TotalDuSemestre(matricule){
+    this.examenService.TotalSemestre(matricule,"SEMESTER1")
+    .subscribe(data => {
+        
+                this.totals = data.total;
+                
+       }
+      
+      , error => 
+      console.log(error)
+
+    );
+  }
+  TotalCoefsDuSemestre(matricule){
+    this.examenService.TotalCoef(matricule,"SEMESTER1")
+    .subscribe(data => {
+        
+                this.coefs = data
+       }
+      
+      , error => 
+      console.log(error)
+
+    );
+  }
+
+  
+
+
   
 
  

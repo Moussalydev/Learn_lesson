@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="row">
+    <div class="col-md-8" style="margin: auto;">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th> Matiere </th>
+                <th> Note </th>
+                <th> Semestre </th>
+                <th> Date </th>
+                <th> Action  </th>
+                
+
+               
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let examen of examens">
+                <td> {{examen.speciality.nom_speciality}}</td>
+                <td> {{examen.note}} </td>
+               <td> {{examen.semestre}}</td>
+               <td> {{examen.date | date}}</td>
+               <td><button class="btn btn-info" (click)="delete(examen.eleve.matricule,examen.speciality.nom_speciality,examen.semestre)"> supprimer</button> </td>
+              
+            </tr>
+        </tbody>
+
+
+    </table>
+
+</div>
+</div>
+</div>

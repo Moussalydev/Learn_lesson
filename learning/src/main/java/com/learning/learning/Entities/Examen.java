@@ -19,6 +19,7 @@ public class Examen {
     private double notedevoir;
     private LocalDate dateExamen;
     private double note;
+    private double total;
     private SemesterType semestre;
 
     public BigInteger getId() {
@@ -39,6 +40,14 @@ public class Examen {
 
     public void setDateExamen(LocalDate dateExamen) {
         this.dateExamen = dateExamen;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
     }
 
     public void setId(BigInteger id) {
@@ -86,6 +95,7 @@ public class Examen {
                 ", notedevoir=" + notedevoir +
                 ", dateExamen=" + dateExamen +
                 ", note=" + note +
+                ", total=" + total +
                 ", semestre=" + semestre +
                 '}';
     }
