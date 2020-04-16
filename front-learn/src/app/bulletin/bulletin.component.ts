@@ -36,6 +36,7 @@ export class BulletinComponent implements OnInit {
       this.Moyenne_final(this.id);
 
       this.TotalDuSemestre(this.id)
+      this.TotalCoefsDuSemestre(this.id)
 
       
 

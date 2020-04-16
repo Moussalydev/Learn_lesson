@@ -1,6 +1,5 @@
 package com.learning.learning.services;
 
-import com.learning.learning.Entities.Evaluation;
 import com.learning.learning.Entities.Examen;
 import com.learning.learning.Exception.ResourceNotFoundException;
 import com.learning.learning.RepoMongo.ExamenRepository;
@@ -62,6 +61,7 @@ public class ExamenService {
                 matricule,matiere,semestre);
 
         examen.setNotedevoir(examenDetails.getNotedevoir());
+        examen.setNote(examenDetails.getNote());
         examen.setTotal(examenDetails.getTotal());
 
         final Examen updatedExamen = examenRepository.save(examen);

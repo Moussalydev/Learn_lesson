@@ -3,6 +3,8 @@ import { EvaluationService } from '../services/evaluation.service';
 import { ActivatedRoute } from '@angular/router';
 import { stringify } from 'querystring';
 import { ExamenService } from '../services/examen.service';
+import Swal from 'sweetalert2';
+import { EleveService } from '../services/eleves.service';
 
 @Component({
   selector: 'app-afficher-devoirs',
@@ -12,9 +14,11 @@ import { ExamenService } from '../services/examen.service';
 export class AfficherDevoirsComponent implements OnInit {
 
   id :string;
+  eleve:any;
   constructor(
     private route:ActivatedRoute,
     private evaluationService:EvaluationService,
+    private eleveService:EleveService,
     private examenService:ExamenService
   ) { }
 
@@ -28,8 +32,19 @@ export class AfficherDevoirsComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
+    this.Find_Eleve(this.id)
     this.TrouverDevoirsDeLeleve(this.id)
 
+  }
+  Find_Eleve(matricule){
+    this.eleveService.TrouverEleveParId(matricule)
+      .subscribe(data => {
+            this.eleve =data;
+           
+       
+      }, error => 
+      console.log(error)
+      );
   }
   TrouverDevoirsDeLeleve(id){
 
@@ -44,28 +59,35 @@ export class AfficherDevoirsComponent implements OnInit {
       );
   }
   ModifierNote(devoir){
-    this.MisAjourDevoir(devoir)
+    this.MisAjourDevoir(devoir);
+
+    this.MisAjourExamen(devoir.eleve.matricule,devoir.speciality.nom_speciality,devoir.semestre)
     
   }
 
   delete(matricule,matiere,semestre,date){
-  
 
     this.evaluationService.deleteEvaluation(matricule,matiere,semestre,date)
                 .subscribe(
                   data => {
-                    console.log(data);
-                    
-                  
+                    console.log(data);         
      },
     
      error => console.log(error)
       
      );
-     
-
-    
              
+    }
+    public succes(){
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Enrégistré avec succès',
+        showConfirmButton: false,
+        timer: 1500
+      })
+  
+  
     }
     MisAjourExamen(matricule,matiere,semestre){
       var nouvelle_moyenne :number;
@@ -112,7 +134,7 @@ export class AfficherDevoirsComponent implements OnInit {
       let date= data.date;
       this.evaluationService.EditDevoir(matricule,matiere,semestre,date,data)
       .subscribe(data => 
-          console.log("devoir modifié avec succes"), 
+          this.succes(), 
         error => 
           console.log("erreur lors de la mis à jour")
         );   

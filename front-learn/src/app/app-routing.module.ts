@@ -30,7 +30,7 @@ const routes: Routes = [
   {path:'list-eleves',component: ListElevesComponent},
   {path:'devoirs/:id',component:AfficherDevoirsComponent},
   {path:'compos/:id',component:AfficherexamenComponent},
-  {path:'releve1/:id',component: BulletinComponent},
+  {path:'bulletin1/:id',component: BulletinComponent},
   {path:'ajout-eleves',component: AjoutElevesComponent},
   {path:'ajout-matiere',component: AjoutSubjectComponent},
   {path:'evaluer',component:EvaluerComponent},

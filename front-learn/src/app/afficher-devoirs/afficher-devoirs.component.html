@@ -1,6 +1,9 @@
 <app-menu> </app-menu>
+<div style="background-color: #3C7AB3;color: white;padding: 0.125%;">
+    <h3 style="text-align: center;"> Relevé de notes de </h3>
+</div><br>
 <div class="container">
-    <div class="row">
+    <div class="row" *ngIf="devoirs.length > 0">
     <div class="col-md-8" style="margin: auto;">
     <table class="table table-striped">
         <thead>
@@ -32,5 +35,9 @@
     </table>
 
 </div>
+</div>
+<div *ngIf="devoirs.length ==0">
+    <h3> Pas de notes pour cet eleve !</h3>
+
 </div>
 </div>

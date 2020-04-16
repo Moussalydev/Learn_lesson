@@ -1,5 +1,9 @@
+<app-menu> </app-menu>
+<div style="background-color: #3C7AB3;color: white;padding: 0.125%;">
+    <h3 style="text-align: center;"> Relevé de notes de </h3>
+</div><br>
 <div class="container">
-    <div class="row">
+    <div class="row" *ngIf="examens.length > 0">
     <div class="col-md-8" style="margin: auto;">
     <table class="table table-striped">
         <thead>
@@ -9,7 +13,8 @@
                 <th> Semestre </th>
                 <th> Date </th>
                 <th> Action  </th>
-                
+                <th>    </th>
+                <th> </th>
 
                
             </tr>
@@ -17,11 +22,11 @@
         <tbody>
             <tr *ngFor="let examen of examens">
                 <td> {{examen.speciality.nom_speciality}}</td>
-                <td> {{examen.note}} </td>
+                <td><input type="number" name="note" [(ngModel)]="examen.note"></td>
                <td> {{examen.semestre}}</td>
                <td> {{examen.date | date}}</td>
+               <td><button class="btn btn-info" (click)="ModifierNote(examen)"> Modifier</button> </td>
                <td><button class="btn btn-info" (click)="delete(examen.eleve.matricule,examen.speciality.nom_speciality,examen.semestre)"> supprimer</button> </td>
-              
             </tr>
         </tbody>
 
@@ -29,5 +34,9 @@
     </table>
 
 </div>
+</div>
+<div *ngIf="examens.length ==0">
+    <h3> Pas de notes pour cet eleve !</h3>
+
 </div>
 </div>
