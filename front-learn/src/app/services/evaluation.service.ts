@@ -48,6 +48,10 @@ export class EvaluationService {
     return this.http.get(`${this.baseUrl}devoir-date`+"?"+"matricule="+matricule+"&"+"matiere="+matiere
     +"&"+"semestre="+semestre +"&"+"date="+date);
   }
+  EditDevoir(matricule: string,matiere:string,semestre:string,date, value: any): Observable<Object> {
+    return this.http.put(`${this.baseUrl}devoir-edit`+"?"+"matricule="+matricule+"&"+"matiere="+matiere
+      +"&"+"semestre="+semestre+"&"+"date="+date,value);
+  }
 
   
   

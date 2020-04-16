@@ -1,3 +1,4 @@
+<app-menu> </app-menu>
 <div class="container">
     <div class="row">
     <div class="col-md-8" style="margin: auto;">
@@ -10,6 +11,7 @@
                 <th> Date </th>
                 <th> Action  </th>
                 <th>    </th>
+                <th> </th>
 
                
             </tr>
@@ -17,9 +19,10 @@
         <tbody>
             <tr *ngFor="let devoir of devoirs">
                 <td> {{devoir.speciality.nom_speciality}}</td>
-                <td> {{devoir.note}} </td>
+                <input type="text" name="note" [(ngModel)]="devoir.note">
                <td> {{devoir.semestre}}</td>
                <td> {{devoir.date | date}}</td>
+               <td><button class="btn btn-info" (click)="ModifierNote(devoir)"> Modifier</button> </td>
                <td><button class="btn btn-info" (click)="delete(devoir.eleve.matricule,devoir.speciality.nom_speciality,devoir.semestre,devoir.date)"> supprimer</button> </td>
                <td><button class="btn btn-info" (click)="MisAjourExamen(devoir.eleve.matricule,devoir.speciality.nom_speciality,devoir.semestre)"> Actualiser examen </button> </td>
             </tr>

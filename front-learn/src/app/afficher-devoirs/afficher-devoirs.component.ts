@@ -43,6 +43,10 @@ export class AfficherDevoirsComponent implements OnInit {
       console.log(error)
       );
   }
+  ModifierNote(devoir){
+    this.MisAjourDevoir(devoir)
+    
+  }
 
   delete(matricule,matiere,semestre,date){
   
@@ -99,6 +103,20 @@ export class AfficherDevoirsComponent implements OnInit {
               console.log(error)
         
             );
+    }
+
+    MisAjourDevoir(data){
+      let matricule = data.eleve.matricule;
+      let matiere = data.speciality.nom_speciality;
+      let semestre = data.semestre;
+      let date= data.date;
+      this.evaluationService.EditDevoir(matricule,matiere,semestre,date,data)
+      .subscribe(data => 
+          console.log("devoir modifié avec succes"), 
+        error => 
+          console.log("erreur lors de la mis à jour")
+        );   
+
     }
 
 }

@@ -118,7 +118,7 @@ public class ExamenService {
     public Examen TotalCoefSemestre(String matricule,String semestre){
 
         GroupOperation groupByStateAndSumPop = group("id")
-                .sum("speciality.coef").as("coef");
+                .sum("speciality.coef").as("total");
         Aggregation aggregation = newAggregation(
 
                 match(

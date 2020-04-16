@@ -1,6 +1,7 @@
 package com.learning.learning.MongoController;
 
 import com.learning.learning.Entities.Evaluation;
+import com.learning.learning.Entities.Examen;
 import com.learning.learning.Exception.ResourceNotFoundException;
 import com.learning.learning.services.EvaluationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +74,18 @@ public class EvaluationController {
     )
     {
         return evaluationService.FindDevoirDate(matricule,matiere,semestre,date);
+
+    }
+    @PutMapping("/devoir-edit")
+    public ResponseEntity<Evaluation> Editer_evaluation(
+            @RequestParam String matricule,
+            @RequestParam String matiere,
+            @RequestParam String semestre,
+            @RequestParam String date,
+            @Valid @RequestBody Examen examenDetails)
+
+            throws ResourceNotFoundException {
+        return evaluationService.Editer_evaluation(matricule,matiere,semestre,date,examenDetails);
 
     }
 

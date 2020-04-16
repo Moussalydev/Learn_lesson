@@ -122,7 +122,7 @@ export class BulletinComponent implements OnInit {
     this.examenService.TotalCoef(matricule,"SEMESTER1")
     .subscribe(data => {
         
-                this.coefs = data
+                this.coefs = data.total
        }
       
       , error => 

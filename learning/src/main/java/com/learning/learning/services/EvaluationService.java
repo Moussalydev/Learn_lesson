@@ -13,8 +13,9 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 import javax.validation.Valid;
@@ -109,6 +110,22 @@ public class EvaluationService {
 
         return mongoTemplate.find(query, Evaluation.class).get(0);
     }
+    public ResponseEntity<Evaluation> Editer_evaluation(
+            String matricule,
+            String matiere,
+            String semestre,
+            String date,
+            Examen evaluationDetails)
+
+            throws ResourceNotFoundException {
+        Evaluation evaluation = FindDevoirDate(
+                matricule,matiere,semestre,date);
+        evaluation.setNote(evaluationDetails.getNote());
+
+        final Evaluation updatedEvaluation = evaluationRepository.save(evaluation);
+        return ResponseEntity.ok(updatedEvaluation);
+    }
+
 
 
 
