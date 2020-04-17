@@ -1,6 +1,7 @@
 package com.learning.learning.Entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 
 @Entity
 @Table(name = "speciality")
@@ -9,6 +10,7 @@ public class Speciality {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String nom_speciality;
+    @Min(1)
     private Integer coef;
 
     @ManyToOne

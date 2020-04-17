@@ -3,7 +3,7 @@
     <h3 style="text-align: center;"> Bulletin provisoire</h3>
 </div>
 <br>
-<div class="container">
+<div class="container" *ngIf="examens.length >0">
     <div class="row">
         <div class="col-md-3 entete" style="margin-left: 14%;">
             <img src="../../assets/img/gando.jpg" alt="">
@@ -69,4 +69,8 @@
             </table>
         </div>
     </div>
+</div>
+<div *ngIf="examens.length ==0">
+    <h4> Non encore disponible</h4>
+
 </div>

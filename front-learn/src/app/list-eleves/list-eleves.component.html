@@ -12,7 +12,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th> Matricule </th>
+                <th>  Matricule </th>
                 <th> Prenom </th>
                 <th> Nom </th>
                 <th> Date de naissance </th>
@@ -20,6 +20,8 @@
                 <th> Niveau </th>
                 <th> Noter devoir </th>
                 <th> Noter composition </th>
+                <th> Infos </th>
+                
             </tr>
         </thead>
         <tbody>
@@ -36,6 +38,13 @@
                 <td> 
                     <button class="btn btn-info" (click)="NoterCompo(eleve)"> Note composition </button>
                 </td>
+                <td>
+                    <div class="initial">
+                        <a (click)="openDetails(eleve.matricule)"> Infos</a>
+                    </div>
+
+                </td>
+               
 
             </tr>
         </tbody>

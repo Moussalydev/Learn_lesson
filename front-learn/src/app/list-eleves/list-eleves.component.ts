@@ -4,6 +4,7 @@ import { EleveService } from '../services/eleves.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EvaluerComponent } from '../evaluer/evaluer.component';
 import { AjoutExamenComponent } from '../ajout-examen/ajout-examen.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-eleves',
@@ -14,6 +15,7 @@ export class ListElevesComponent implements OnInit {
 
   constructor(
     private eleveService:EleveService,
+    private router:Router,
     private http: HttpClient,
     private modalService: NgbModal
     ) { }
@@ -78,5 +80,12 @@ export class ListElevesComponent implements OnInit {
     this.OpenDialogCompo(eleve)
 
   }
+  openDetails(matricule){
+
+    this.router.navigate(['details', matricule]);
+
+
+  }
+  
 
 }

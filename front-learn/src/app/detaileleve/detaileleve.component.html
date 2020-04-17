@@ -1,1 +1,51 @@
-<p>detaileleve works!</p>
+<app-menu> </app-menu>
+
+<div class="container">
+    <div style="background-color: #3C7AB3;color: white;padding: 0.125%;">
+        <h3 style="text-align: center;"> Profil </h3>
+    </div><br>
+
+    <div class="row">
+        <div class="col-md-6">
+            Prénom : {{eleve.prenom}} <br>
+            Nom : {{eleve.nom}} <br>
+            Date et lieu de naissance : né le {{eleve.dateNaissance | date }} à {{eleve.lieuNaissance}}
+
+
+        </div>
+        <div class="col-md-6">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th> Relevé des devoirs</th>
+                        <th> Relevé des compositions</th>
+                        <th> Bulletin semestre 1</th>
+                        <th> Bulletin semestre 2</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td> <a (click)="releveDevoir(eleve.matricule)">  Afficher les devoirs </a> </td>
+                        <td> <a (click)="releveCompos(eleve.matricule)"> Afficher les notes de compositions </a></td>
+                        <td> 
+                            <a (click)="bulletin1(eleve.matricule)">
+                            Afficher le bulletin provisoire semestre 1
+                            </a>
+                        </td>
+                        <td> 
+                            <a (click)="bulletin2(eleve.matricule)">
+                            Afficher le bulletin provisoire semestre 2
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+
+
+            </table>
+        </div>
+
+    </div>
+    
+
+
+</div>

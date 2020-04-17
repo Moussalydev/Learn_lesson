@@ -18,6 +18,7 @@ import { AfficherDevoirsComponent } from './afficher-devoirs/afficher-devoirs.co
 import { MenuComponent } from './menu/menu.component';
 import { AfficherexamenComponent } from './afficherexamen/afficherexamen.component';
 import { DetaileleveComponent } from './detaileleve/detaileleve.component';
+import { ModifiermatiereComponent } from './modifiermatiere/modifiermatiere.component';
 
 
 
@@ -37,6 +38,7 @@ import { DetaileleveComponent } from './detaileleve/detaileleve.component';
     MenuComponent,
     AfficherexamenComponent,
     DetaileleveComponent,
+    ModifiermatiereComponent,
   
   ],
   imports: [
