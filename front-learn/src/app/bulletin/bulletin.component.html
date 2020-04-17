@@ -3,15 +3,15 @@
     <h3 style="text-align: center;"> Bulletin provisoire</h3>
 </div>
 <br>
-<div class="container" *ngIf="examens.length >0">
+<div class="container">
     <div class="row">
-        <div class="col-md-3 entete" style="margin-left: 14%;">
+        <div class="col-md-3 entete" >
             <img src="../../assets/img/gando.jpg" alt="">
 
         </div>
-        <div class="col-md-6 entete" style="width:1%">
-            <legend> Ecole privée le "Gando"</legend><br>
-            Téléphone : 775281570
+        <div class="col-md-9 entete" >
+            <legend style="text-align: center;"> Ecole privée le "Gando"</legend><br>
+            <i style="margin: auto;"> Téléphone : 775281570</i>  
 
         </div>
 
@@ -24,7 +24,7 @@
     
     <div class="row">
        
-        <div class="col-md-9" style="margin: auto;">
+        <div class="col-md-12" style="margin: auto;">
             Prénom : {{eleve.prenom}} <br>
             Nom : {{eleve.nom}} <br>
             Date et lieu de naissance : {{eleve.dateNaissance | date}} à {{eleve.lieuNaissance}} <br>
@@ -69,8 +69,8 @@
             </table>
         </div>
     </div>
-</div>
-<div *ngIf="examens.length ==0">
-    <h4> Non encore disponible</h4>
 
+    <div style="margin-left: 79%;">
+        <button class="btn btn-success" (click)="Valider()"> Valider </button>
+  </div>
 </div>

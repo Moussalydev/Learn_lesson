@@ -3,6 +3,8 @@ import { ExamenService } from '../services/examen.service';
 import { ActivatedRoute } from '@angular/router';
 import { EleveService } from '../services/eleves.service';
 import { SpecialityService } from '../services/speciality.service';
+import { BulletinOneService } from '../services/bulletinone.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-bulletin',
@@ -15,15 +17,16 @@ export class BulletinComponent implements OnInit {
         private route:ActivatedRoute, 
         private examenService:ExamenService,
         private eleveService:EleveService,
-        private specialityService:SpecialityService
+        private specialityService:SpecialityService,
+        private bulletinOneService:BulletinOneService
     ) { }
   
-  note_examen =[]
 
   eleve:any;
   examens=[];
   public totals :number;
   public coefs:number;
+  public semestre ="SEMESTER1";
   
 
 
@@ -60,9 +63,8 @@ export class BulletinComponent implements OnInit {
     this.specialityService.AfficherTouteMatiere().subscribe(
       data => {
           for(let i = 0; i<data.length; i++){
-              this.examenService.TrouverEleveParEleve(matricule,data[i].nom_speciality,"SEMESTER1")
+              this.examenService.TrouverEleveParEleve(matricule,data[i].nom_speciality,this.semestre)
               .subscribe(data => {
-                  
                           this.examens.push(data);
                 }
                 
@@ -70,27 +72,19 @@ export class BulletinComponent implements OnInit {
                 console.log(error)
           
               );
-
           }
-
-
       },
         (error) => {
           
-          
-        }
-    );
+          }
+     );
        
-  
-   
   }
 
   TotalDuSemestre(matricule){
-    this.examenService.TotalSemestre(matricule,"SEMESTER1")
+    this.examenService.TotalSemestre(matricule,this.semestre)
     .subscribe(data => {
-        
                 this.totals = data.total;
-                
        }
       
       , error => 
@@ -99,7 +93,7 @@ export class BulletinComponent implements OnInit {
     );
   }
   TotalCoefsDuSemestre(matricule){
-    this.examenService.TotalCoef(matricule,"SEMESTER1")
+    this.examenService.TotalCoef(matricule,this.semestre)
     .subscribe(data => {
         
                 this.coefs = data.total
@@ -110,7 +104,38 @@ export class BulletinComponent implements OnInit {
 
     );
   }
+  public succes(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'bulletin vérifié et enrégistré',
+      showConfirmButton: false,
+      timer: 1500
+    })
 
+
+  }
+
+  
+  Valider(){
+    let bulletin = {
+       "eleve":this.eleve,
+       "classe":this.eleve.niveau,
+       "moyenne":this.totals/this.coefs
+    }
+    
+    this.sendToBack(bulletin)
+  }
+  sendToBack(bulletin){
+    this.bulletinOneService.AjouterMoyenne(bulletin)
+    .subscribe(data =>
+      this.succes(), 
+       error =>
+        console.log("erreur dans l'enrégistrement !")
+        );
+
+
+  }
   
 
 
