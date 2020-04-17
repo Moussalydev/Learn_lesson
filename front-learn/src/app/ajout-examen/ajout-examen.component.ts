@@ -87,8 +87,8 @@ export class AjoutExamenComponent implements OnInit {
   public error(){
     Swal.fire({
       icon: 'error',
-      title: 'Oops...',
-      text: 'Something went wrong!',
+      title: 'Attention',
+      text: 'Note dejà enrégistrée !',
       footer: '<a href>Why do I have this issue?</a>'
     })
 
@@ -113,6 +113,22 @@ export class AjoutExamenComponent implements OnInit {
         }
     );
   }
+  AjouterExamen(matricule,matiere,semestre){
+    this.evaluationService.TrouverEleveParEleve(matricule,matiere,semestre)
+    .subscribe(data => {
+               
+                this.Evaluation.notedevoir =Number(data.note);
+                this.Evaluation.total = this.Evaluation.notedevoir + this.Evaluation.note;
+                this.Evaluation.total /=2;
+                this.Evaluation.total = (this.Evaluation.total) *(this.Evaluation.speciality.coef);
+                this.sendToBack(this.Evaluation)
+       }
+      
+      , error => 
+      console.log(error)
+
+    );
+  }
 
   onSubmitForm() {
 
@@ -135,34 +151,17 @@ export class AjoutExamenComponent implements OnInit {
           this.Evaluation.semestre = evaluer.semestre;
           this.Evaluation.dateExamen = evaluer.dateExamen;
 
-          
-          
-            var mynote :number;
+          this.examenService.TrouverEleveParEleve(this.data.matricule,evaluer.subject,this.Evaluation.semestre)
+            .subscribe(data => {
              
-             this.evaluationService.TrouverEleveParEleve(this.data.matricule,evaluer.subject,"SEMESTER1")
-             .subscribe(data => {
-                        
-                         this.Evaluation.notedevoir =Number(data.note);
-                         this.Evaluation.total = this.Evaluation.notedevoir + this.Evaluation.note;
-                         this.Evaluation.total /=2;
-                         this.Evaluation.total = (this.Evaluation.total) *(this.Evaluation.speciality.coef);
-                        // console.log(this.Evaluation)
-                         this.sendToBack(this.Evaluation)
-                }
-               
-               , error => 
-               console.log(error)
-         
-             );
-             
-             
+                  this.error();
+              
+            }, error => 
+              this.AjouterExamen(this.data.matricule,evaluer.subject,evaluer.semestre)
+            ); 
            
             
-
-          
-          
-       
-        
+            
       }, error => 
       console.log(error)
       );

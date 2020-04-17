@@ -5,6 +5,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.Date;
@@ -16,8 +18,13 @@ public class Examen {
     private BigInteger id;
     private Eleve eleve;
     private Speciality speciality;
+    @Min(0)
+    @Max(20)
     private double notedevoir;
+
     private LocalDate dateExamen;
+    @Min(0)
+    @Max(20)
     private double note;
     private double total;
     private SemesterType semestre;

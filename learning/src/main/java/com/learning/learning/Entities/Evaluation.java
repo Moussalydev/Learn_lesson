@@ -5,9 +5,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.math.BigInteger;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Document(collection = "evaluations")
 public class Evaluation {
@@ -16,6 +17,8 @@ public class Evaluation {
     private BigInteger id;
     private Eleve eleve;
     private Speciality speciality;
+    @Min(0)
+    @Max(20)
     private double note;
     private LocalDate date;
     private SemesterType semestre;

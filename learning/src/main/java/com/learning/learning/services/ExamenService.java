@@ -29,7 +29,7 @@ public class ExamenService {
     @Autowired
     MongoTemplate mongoTemplate;
 
-    public Examen EvaluerExamen(@Valid @RequestBody Examen examen) {
+    public Examen EvaluerExamen(Examen examen) {
 
         return examenRepository.save(examen);
     }

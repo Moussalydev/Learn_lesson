@@ -99,8 +99,8 @@ export class EvaluerComponent implements OnInit {
   public error(){
     Swal.fire({
       icon: 'error',
-      title: 'Oops...',
-      text: 'Something went wrong!',
+      title: 'Attention...',
+      text: 'Note doit etre entre 0 et 20',
       footer: '<a href>Why do I have this issue?</a>'
     })
 

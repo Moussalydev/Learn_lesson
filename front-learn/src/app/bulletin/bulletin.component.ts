@@ -55,54 +55,33 @@ export class BulletinComponent implements OnInit {
       );
   }
   
-
   Moyenne_final(matricule){
-   
-    
-    this.examenService.TrouverEleveParEleve(matricule,"Espagnol","SEMESTER1")
-    .subscribe(data => {
-        
-                this.examens.push(data);
-       }
-      
-      , error => 
-      console.log(error)
 
+    this.specialityService.AfficherTouteMatiere().subscribe(
+      data => {
+          for(let i = 0; i<data.length; i++){
+              this.examenService.TrouverEleveParEleve(matricule,data[i].nom_speciality,"SEMESTER1")
+              .subscribe(data => {
+                  
+                          this.examens.push(data);
+                }
+                
+                , error => 
+                console.log(error)
+          
+              );
+
+          }
+
+
+      },
+        (error) => {
+          
+          
+        }
     );
-    this.examenService.TrouverEleveParEleve(matricule,"Anglais","SEMESTER1")
-    .subscribe(data => {
-        
-            this.examens.push(data);
-       }
-      
-      , error => 
-      console.log(error)
-
-    );
-   /*  this.examenService.TrouverEleveParEleve(matricule,"science physique","SEMESTER1")
-    .subscribe(data => {
-        
-            this.examens.push(data);
-       }
-      
-      , error => 
-      console.log(error)
-
-    ); */
-   /*  this.examenService.TrouverEleveParEleve(matricule,"compo française","SEMESTER1")
-    .subscribe(data => {
-        
-            this.examens.push(data);
-           
-            
-       }
-      
-      , error => 
-      console.log(error)
-
-    );
-     */
-
+       
+  
    
   }
 
