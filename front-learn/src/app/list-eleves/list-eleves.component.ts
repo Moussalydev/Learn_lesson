@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { EleveService } from '../services/eleves.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
   templateUrl: './list-eleves.component.html',
   styleUrls: ['./list-eleves.component.scss']
 })
+
 export class ListElevesComponent implements OnInit {
 
   constructor(

@@ -25,7 +25,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>  Matricule </th>
+                <th> Matricule </th>
                 <th> Prenom </th>
                 <th> Nom </th>
                 <th> Date de naissance </th>
@@ -38,7 +38,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let eleve of eleves | tableFilter: niveau">
+            <tr *ngFor="let eleve of eleves | eleveFilter : niveau" >
                 <td> {{eleve.matricule}}</td>
                 <td> {{eleve.prenom}} </td>
                 <td> {{eleve.nom}} </td>

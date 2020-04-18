@@ -20,6 +20,9 @@ import { AfficherexamenComponent } from './afficherexamen/afficherexamen.compone
 import { DetaileleveComponent } from './detaileleve/detaileleve.component';
 import { ModifiermatiereComponent } from './modifiermatiere/modifiermatiere.component';
 import { EditerEleveComponent } from './editer-eleve/editer-eleve.component';
+import {EleveFilterPipe} from './list-eleves/eleve.filter.pipe'
+
+
 
 
 
@@ -42,6 +45,7 @@ import { EditerEleveComponent } from './editer-eleve/editer-eleve.component';
     DetaileleveComponent,
     ModifiermatiereComponent,
     EditerEleveComponent,
+    EleveFilterPipe
   
   ],
   imports: [
@@ -50,6 +54,7 @@ import { EditerEleveComponent } from './editer-eleve/editer-eleve.component';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
+  
     NgbModule
   ],
   entryComponents: [
