@@ -1,0 +1,38 @@
+<app-menu> </app-menu>
+<div class="container">
+    <div class="row">
+    <div class="col-md-6">
+    <form *ngIf="eleveeditForm" [formGroup]="eleveeditForm">
+        <div class="form-group">
+            <label for="matricule">Matricule</label>
+            <input type="text" id="matricule" class="form-control" formControlName="matricule" placeholder="matricule">
+        </div>
+        <div class="form-group">
+            <label for="lastname">Prenom</label>
+            <input type="text" id="prenom" class="form-control" formControlName="prenom" placeholder="prenom">
+        </div>
+        <div class="form-group">
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" class="form-control" formControlName="nom" placeholder="Nom">
+        </div>
+        <div class="form-group">
+            <label for="date_naiss">Date de naissance </label>
+            <input type="date" id="dateNaissance" class="form-control" formControlName="dateNaissance" placeholder="Date de naissance">
+        </div>
+        <div class="form-group">
+            <label for="nom">Lieu de naissance</label>
+            <input type="text" id="lieuNaissance" class="form-control" formControlName="lieuNaissance" placeholder="Lieu de naissance">
+        </div>
+        
+        <div class="form-group">
+        <label for="level">Niveau</label>
+        <input type="text" id="niveau" class="form-control" formControlName="niveau" placeholder="niveau">
+        </div>
+        
+        
+    
+        <button type="submit" [disabled]="eleveeditForm.invalid" class="btn btn-primary" (click)="onSubmitForm()">Soumettre</button>
+    </form>
+</div>
+</div>
+</div>

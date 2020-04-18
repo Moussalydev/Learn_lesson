@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class EleveService {
@@ -32,4 +34,30 @@ public class EleveService {
 
         return ResponseEntity.ok().body(e);
     }
+    public Map<String, Boolean> deleteEleve(String matricule)
+            throws ResourceNotFoundException {
+        Eleve eleve = eleveRepository.findEleveByMatricule(matricule);
+               // .orElseThrow(() -> new ResourceNotFoundException("Eleve non inscris pour cet identifiant :: " + studentId));
+
+        eleveRepository.delete(eleve);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+        return response;
+    }
+    public ResponseEntity<Eleve> EditerEleve(String matricule,Eleve eleveDetails)  {
+
+        Eleve eleve = eleveRepository.findEleveByMatricule(matricule);
+        eleve.setMatricule(eleveDetails.getMatricule());
+        eleve.setPrenom(eleveDetails.getPrenom());
+        eleve.setNom(eleveDetails.getNom());
+        eleve.setDateNaissance(eleveDetails.getDateNaissance());
+        eleve.setLieuNaissance(eleveDetails.getLieuNaissance());
+        eleve.setNiveau(eleveDetails.getNiveau());
+
+        final Eleve updatedEleve = eleveRepository.save(eleve);
+
+
+        return ResponseEntity.ok(updatedEleve);
+    }
+
 }

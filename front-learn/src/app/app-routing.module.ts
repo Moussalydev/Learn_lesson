@@ -12,6 +12,8 @@ import { AjoutExamenComponent } from './ajout-examen/ajout-examen.component';
 import { AfficherDevoirsComponent } from './afficher-devoirs/afficher-devoirs.component';
 import { AfficherexamenComponent } from './afficherexamen/afficherexamen.component';
 import { DetaileleveComponent } from './detaileleve/detaileleve.component';
+import { EditerEleveComponent } from './editer-eleve/editer-eleve.component';
+
 
 
 
@@ -30,6 +32,7 @@ const routes: Routes = [
   {path:'signup',component: SignupComponent},
   {path:'list-eleves',component: ListElevesComponent},
   {path:'details/:id',component:DetaileleveComponent},
+  {path:'eleve/:id',component:EditerEleveComponent},
   {path:'devoirs/:id',component:AfficherDevoirsComponent},
   {path:'compos/:id',component:AfficherexamenComponent},
   {path:'bulletin1/:id',component: BulletinComponent},

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping("${app.api}")
 @RestController
@@ -29,6 +30,20 @@ public class EleveController {
     @GetMapping("/eleve/{matricule}")
     public ResponseEntity<Eleve> FindByMatricule(@PathVariable(value = "matricule") String matricule) throws ResourceNotFoundException {
         return eleveService.FindByMatricule(matricule);
+
+    }
+    @PutMapping("/eleve/{matricule}")
+    ResponseEntity<Eleve> EditerEleve(
+            @PathVariable(value = "matricule") String matricule,
+            @Valid @RequestBody Eleve eleveDetails) {
+
+        return eleveService.EditerEleve(matricule,eleveDetails);
+
+    }
+    @DeleteMapping("/eleve/{matricule}")
+    public Map<String, Boolean> deleteEleve(@PathVariable(value = "matricule") String matricule)
+            throws ResourceNotFoundException {
+        return eleveService.deleteEleve(matricule);
 
     }
 }

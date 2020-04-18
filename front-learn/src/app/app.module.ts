@@ -19,6 +19,8 @@ import { MenuComponent } from './menu/menu.component';
 import { AfficherexamenComponent } from './afficherexamen/afficherexamen.component';
 import { DetaileleveComponent } from './detaileleve/detaileleve.component';
 import { ModifiermatiereComponent } from './modifiermatiere/modifiermatiere.component';
+import { EditerEleveComponent } from './editer-eleve/editer-eleve.component';
+
 
 
 
@@ -39,6 +41,7 @@ import { ModifiermatiereComponent } from './modifiermatiere/modifiermatiere.comp
     AfficherexamenComponent,
     DetaileleveComponent,
     ModifiermatiereComponent,
+    EditerEleveComponent,
   
   ],
   imports: [

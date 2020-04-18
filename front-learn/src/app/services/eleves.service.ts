@@ -24,6 +24,8 @@ export class EleveService {
     })
 };
 
+
+
  AfficherTous(): Observable<any> {
     return this.http.get(`${this.baseUrl}list-eleve`);
   }
@@ -38,11 +40,11 @@ export class EleveService {
   }
  
   EditerEleve(matricule: string, value: any): Observable<Object> {
-    return this.http.put(`${this.baseUrl}/${matricule}`, value,this.httpOptions);
+    return this.http.put(`${this.baseUrl}eleve/${matricule}`, value);
   }
 
   supprimerEleve(matricule: string): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${matricule}`, this.httpOptions);
+    return this.http.delete(`${this.baseUrl}eleve/${matricule}`);
   }
 
   

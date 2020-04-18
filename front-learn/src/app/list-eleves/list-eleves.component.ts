@@ -21,6 +21,7 @@ export class ListElevesComponent implements OnInit {
     ) { }
   centered = true;
   eleves:any;
+  niveau:string;
 
 
 

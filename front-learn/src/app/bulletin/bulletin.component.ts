@@ -1,10 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ExamenService } from '../services/examen.service';
 import { ActivatedRoute } from '@angular/router';
 import { EleveService } from '../services/eleves.service';
 import { SpecialityService } from '../services/speciality.service';
 import { BulletinOneService } from '../services/bulletinone.service';
 import Swal from 'sweetalert2';
+import * as jspdf from 'jspdf';  
+import jsPDF from 'jspdf'
+import html2canvas from 'html2canvas'
+
+
 
 @Component({
   selector: 'app-bulletin',
@@ -27,6 +32,15 @@ export class BulletinComponent implements OnInit {
   public totals :number;
   public coefs:number;
   public semestre ="SEMESTER1";
+
+  @ViewChild('content') content: ElementRef;
+
+  makePdf() { 
+    let doc = new jsPDF();
+    doc.addHTML(this.content.nativeElement, function() {
+       doc.save("obrz.pdf");
+    });
+  }
   
 
 
@@ -37,7 +51,6 @@ export class BulletinComponent implements OnInit {
        this.Find_Eleve(this.id)
 
       this.Moyenne_final(this.id);
-
       this.TotalDuSemestre(this.id)
       this.TotalCoefsDuSemestre(this.id)
 
@@ -124,18 +137,22 @@ export class BulletinComponent implements OnInit {
        "moyenne":this.totals/this.coefs
     }
     
-    this.sendToBack(bulletin)
+    //this.sendToBack(bulletin)
+   this.makePdf();
   }
   sendToBack(bulletin){
     this.bulletinOneService.AjouterMoyenne(bulletin)
     .subscribe(data =>
-      this.succes(), 
+      console.log("success"), 
        error =>
         console.log("erreur dans l'enrégistrement !")
         );
 
 
   }
+
+  
+
   
 
 

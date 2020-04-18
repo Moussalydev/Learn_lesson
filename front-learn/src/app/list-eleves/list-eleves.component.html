@@ -7,6 +7,19 @@
     </div>
     <br>
 
+    <div class="form-group">
+        <strong>Niveau</strong>
+        <select class="form-control"
+                [(ngModel)]="niveau">
+          <option></option>  
+          <option value="6e">6e</option>
+          <option value="5e">5e</option>      
+          <option value="4e">4e</option>
+          <option value="3e">3e</option>
+          <option value="2nd">2nd</option>
+        </select>
+      </div>  
+
     <div class="row">
     <div class="col-md-12" style="margin: auto;">
     <table class="table table-striped">
@@ -25,7 +38,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let eleve of eleves">
+            <tr *ngFor="let eleve of eleves | tableFilter: niveau">
                 <td> {{eleve.matricule}}</td>
                 <td> {{eleve.prenom}} </td>
                 <td> {{eleve.nom}} </td>
