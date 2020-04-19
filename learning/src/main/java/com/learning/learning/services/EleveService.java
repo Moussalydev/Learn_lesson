@@ -4,6 +4,9 @@ import com.learning.learning.Entities.Eleve;
 import com.learning.learning.Exception.ResourceNotFoundException;
 import com.learning.learning.RepoMongo.EleveRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +22,9 @@ public class EleveService {
 
     @Autowired
     EleveRepository eleveRepository;
+
+    @Autowired
+    MongoTemplate mongoTemplate;
 
     public Eleve AjoutEleve(@Valid @RequestBody Eleve eleve) {
 
@@ -58,6 +64,13 @@ public class EleveService {
 
 
         return ResponseEntity.ok(updatedEleve);
+    }
+    public long NombreEleves(String niveau) {
+        Query query = new Query();
+        query.addCriteria(
+                Criteria.where("niveau").is(niveau)
+        );
+        return mongoTemplate.count(query, Eleve.class);
     }
 
 }

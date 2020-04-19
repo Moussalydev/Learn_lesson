@@ -46,4 +46,11 @@ public class EleveController {
         return eleveService.deleteEleve(matricule);
 
     }
+    @GetMapping("/nombre-eleve")
+    public long NombreElevesDelaClasse(
+            @RequestParam String niveau
+    ){
+        return eleveService.NombreEleves(niveau);
+
+    }
 }

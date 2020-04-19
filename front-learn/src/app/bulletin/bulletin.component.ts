@@ -5,9 +5,8 @@ import { EleveService } from '../services/eleves.service';
 import { SpecialityService } from '../services/speciality.service';
 import { BulletinOneService } from '../services/bulletinone.service';
 import Swal from 'sweetalert2';
-import * as jspdf from 'jspdf';  
-import jsPDF from 'jspdf'
-import html2canvas from 'html2canvas'
+import * as jsPDF from 'jspdf'
+import $ from "jquery";
 
 
 
@@ -32,15 +31,11 @@ export class BulletinComponent implements OnInit {
   public totals :number;
   public coefs:number;
   public semestre ="SEMESTER1";
+  public nombre_eleve_classe = 0;
+  public nombre_bulletin_sem1 = 0;
+  public moyenne_de_la_classe:any;
 
-  @ViewChild('content') content: ElementRef;
-
-  makePdf() { 
-    let doc = new jsPDF();
-    doc.addHTML(this.content.nativeElement, function() {
-       doc.save("obrz.pdf");
-    });
-  }
+ 
   
 
 
@@ -53,6 +48,19 @@ export class BulletinComponent implements OnInit {
       this.Moyenne_final(this.id);
       this.TotalDuSemestre(this.id)
       this.TotalCoefsDuSemestre(this.id)
+
+      this.eleveService.TrouverEleveParId(this.id)
+      .subscribe(data => {
+            this.NombreEleveClasse(data.niveau)
+            this.NombreBulletinSemestreClasse(data.niveau)
+            this.MoyenneClasse(data.niveau)
+           
+       
+      }, error => 
+      console.log(error)
+      );
+
+      
 
       
 
@@ -137,8 +145,9 @@ export class BulletinComponent implements OnInit {
        "moyenne":this.totals/this.coefs
     }
     
-    //this.sendToBack(bulletin)
-   this.makePdf();
+    this.sendToBack(bulletin)
+    
+   
   }
   sendToBack(bulletin){
     this.bulletinOneService.AjouterMoyenne(bulletin)
@@ -150,17 +159,42 @@ export class BulletinComponent implements OnInit {
 
 
   }
+  NombreEleveClasse(classe){
+    this.eleveService.NombreEleves(classe)
+      .subscribe(data => {
+            this.nombre_eleve_classe =data;
+            
+           
+       
+      }, error => 
+      console.log(error)
+      );
+  }
 
-  
+  NombreBulletinSemestreClasse(classe){
+    this.bulletinOneService.Nombre_bulletin_semOne(classe)
+      .subscribe(data => {
+            this.nombre_bulletin_sem1 =data;
+            
+           
+       
+      }, error => 
+      console.log(error)
+      );
+  }
 
-  
-
-
-  
-
+  MoyenneClasse(classe){
+    this.bulletinOneService.MoyenneDeLaClasse(classe)
+      .subscribe(data => {
+            this.moyenne_de_la_classe =data.moyenne;
+            
+           
+       
+      }, error => 
+      console.log(error)
+      );
+  }
  
-
-
   
 
 }

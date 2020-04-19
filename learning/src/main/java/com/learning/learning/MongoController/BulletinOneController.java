@@ -26,6 +26,18 @@ public class BulletinOneController {
         return bulletinOneService.FindBulletinByMatricule(matricule);
 
     }
+    @GetMapping("/nombre-bulletin-sem1")
+    public long NombreBulletinSemestreOne(
+            @RequestParam String niveau
+    ){
+        return bulletinOneService.NombreDeBulletinSemestreOne(niveau);
+
+    }
+    @GetMapping("/moyenne-classe-sem1/{classe}")
+    public Bulletinone MoyenneAverage(@PathVariable(value = "classe") String classe){
+        return bulletinOneService.MoyenneAvg(classe);
+
+    }
 
 
 }

@@ -47,6 +47,10 @@ export class EleveService {
     return this.http.delete(`${this.baseUrl}eleve/${matricule}`);
   }
 
+  NombreEleves(niveau: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}nombre-eleve`+"?"+"niveau="+niveau);
+  }
+
   
   
 

@@ -26,4 +26,16 @@ public class BulletinTwoController {
         return bulletinTwoService.FindBulletinByMatricule(matricule);
 
     }
+    @GetMapping("/nombre-bulletin-sem2")
+    public long NombreBulletinSemestreTwo(
+            @RequestParam String niveau
+    ){
+        return bulletinTwoService.NombreDeBulletinSemestreTwo(niveau);
+
+    }
+    @GetMapping("/moyenne-classe-sem2/{classe}")
+    public Bulletintwo MoyenneAverage(@PathVariable(value = "classe") String classe){
+        return bulletinTwoService.MoyenneAvg(classe);
+
+    }
 }

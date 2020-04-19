@@ -7,7 +7,7 @@ import {AppSettings} from '../services/serveur'
 @Injectable({
   providedIn: 'root'
 })
-export class BulletinOneService {
+export class BulletinTwoService {
 
   public baseUrl = AppSettings.API_ENDPOINT+AppSettings.base_api;
 
@@ -26,16 +26,16 @@ export class BulletinOneService {
 
  
   AjouterMoyenne(bulletin: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}ajout-moyenne-first`,bulletin);
+    return this.http.post(`${this.baseUrl}ajout-moyenne-second`,bulletin);
   }
   MoyenneEleveParId(matricule: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}moyenne-first/${matricule}`);
+    return this.http.get(`${this.baseUrl}moyenne-second/${matricule}`);
   }
-  Nombre_bulletin_semOne(niveau: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}nombre-bulletin-sem1`+"?"+"niveau="+niveau);
+  Nombre_bulletin_semTwo(niveau: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}nombre-bulletin-sem2`+"?"+"niveau="+niveau);
   }
   MoyenneDeLaClasse(niveau: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}moyenne-classe-sem1/${niveau}`);
+    return this.http.get(`${this.baseUrl}moyenne-classe-sem2/${niveau}`);
   }
 
   

@@ -24,6 +24,7 @@
     "@ng-bootstrap/ng-bootstrap": "^6.0.2",
     "angular-filter": "^0.5.17",
     "bootstrap": "^4.4.1",
+    "jquery": "^3.5.0",
     "jspdf": "^1.5.3",
     "ngx-filter-pipe": "^2.1.2",
     "rxjs": "~6.5.4",
