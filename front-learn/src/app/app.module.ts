@@ -20,7 +20,8 @@ import { AfficherexamenComponent } from './afficherexamen/afficherexamen.compone
 import { DetaileleveComponent } from './detaileleve/detaileleve.component';
 import { ModifiermatiereComponent } from './modifiermatiere/modifiermatiere.component';
 import { EditerEleveComponent } from './editer-eleve/editer-eleve.component';
-import {EleveFilterPipe} from './list-eleves/eleve.filter.pipe'
+import {EleveFilterPipe} from './list-eleves/eleve.filter.pipe';
+import { FooterComponent } from './footer/footer.component'
 
 
 
@@ -45,7 +46,8 @@ import {EleveFilterPipe} from './list-eleves/eleve.filter.pipe'
     DetaileleveComponent,
     ModifiermatiereComponent,
     EditerEleveComponent,
-    EleveFilterPipe
+    EleveFilterPipe,
+    FooterComponent
   
   ],
   imports: [

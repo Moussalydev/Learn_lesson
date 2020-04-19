@@ -1,1 +1,96 @@
-<p>bulletin2 works!</p>
+<app-menu *ngIf="nombre_eleve_classe != nombre_bulletin_sem1"> </app-menu>
+<div
+*ngIf="nombre_eleve_classe != nombre_bulletin_sem1" 
+style="background-color: #3C7AB3;color: white;padding: 0.125%;">
+    <h3 style="text-align: center;"> Bulletin provisoire</h3>
+</div>
+<br>
+<div class="container">
+    <div id="target">
+        <div class="row">
+            <div class="col-md-3 entete" >
+                <img src="../../assets/img/gando.jpg" alt="">
+
+            </div>
+            <div class="col-md-9 entete" >
+                <legend style="text-align: center;"> Ecole privée le "Gando"</legend><br>
+                <i style="margin: auto;"> Téléphone : 775281570</i>  
+
+            </div>
+
+        </div>
+        <legend style="margin-left: 75%;font-size: x-small;">
+                Année scolaire: 
+        </legend>
+        
+        <br><br>
+        
+        <div class="row">
+        
+            <div class="col-md-12" style="margin: auto;">
+                Prénom : {{eleve.prenom}} <br>
+                Nom : {{eleve.nom}} <br>
+                Date et lieu de naissance : {{eleve.dateNaissance | date}} à {{eleve.lieuNaissance}} <br>
+                Classe: {{eleve.niveau}}
+
+
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th> Matiere</th>
+                            <th> Moyenne devoir </th>
+                            <th> Composition </th>
+                            <th> Moyenne</th>
+                            <th> Coef</th>
+                            <th> Total </th>
+                            <th> Appréciation </th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let examen of examens">
+                            <td> {{examen.speciality.nom_speciality}}</td>
+                            <td> {{examen.notedevoir}} </td>
+                            <td> {{examen.note}} </td>
+                        
+                            <td> {{((examen.note) + (examen.notedevoir))/2}}</td>
+                            <td> {{examen.speciality.coef}}</td>
+                            <td> {{examen.total}}  </td>
+                            <td> Appréciation </td>
+
+                        </tr>
+                    </tbody>
+                    <br>
+                    <tfoot>
+                        <tr>
+                            <th> Total </th>
+                            <th> Total coef </th>
+                            <th> Moyenne semestrielle</th>
+                            <th> Moyenne classe </th>
+                            <th> Rang </th>
+                            <th> </th>
+                        </tr>
+                        <tr>
+                         <td> {{totals}}</td>
+                         <td>{{coefs}} </td>
+                         <td> {{totals/coefs}}</td>
+                         <td> 
+                            {{moyenne_de_la_classe}}
+                        </td>
+                         <td> </td>
+                         <td> </td>
+                         <td> </td>
+                     </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="nombre_eleve_classe != nombre_bulletin_sem1" style="margin-left: 79%;float: left;">
+        <button class="btn btn-success" (click)="Valider()"> Valider </button>
+  </div>
+ <!--  <div style="margin-left: 87%;">
+    <button id="cmd" class="btn btn-info" (click)="download()"> Télécharger </button>
+</div> -->
+</div>
