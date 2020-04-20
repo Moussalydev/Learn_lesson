@@ -13,7 +13,12 @@
 
 
         </div>
-        <div class="col-md-6">
+       
+    </div>
+    <br><br>
+    <div class="row">
+       
+        <div class="col-md-12">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -29,12 +34,14 @@
                         <td> <a (click)="releveCompos(eleve.matricule)"> Afficher les notes de compositions </a></td>
                         <td> 
                             <a (click)="bulletin1(eleve.matricule)">
-                            Afficher le bulletin provisoire semestre 1
+                                <b *ngIf="nombre_eleve_classe != nombre_bulletin_sem1">  Afficher le bulletin provisoire semestre 1</b>
+                                <b *ngIf="nombre_eleve_classe == nombre_bulletin_sem1">  Afficher le bulletin semestre 1</b>
                             </a>
                         </td>
                         <td> 
                             <a (click)="bulletin2(eleve.matricule)">
-                            Afficher le bulletin provisoire semestre 2
+                                 <b *ngIf="nombre_eleve_classe != nombre_bulletin_sem2"> Afficher le bulletin provisoire semestre 2 </b>
+                                 <b *ngIf="nombre_eleve_classe == nombre_bulletin_sem2"> Afficher le bulletin semestre 2 </b>
                             </a>
                         </td>
                     </tr>
@@ -43,6 +50,8 @@
 
             </table>
         </div>
+
+
 
     </div>
     
